@@ -1,4 +1,3 @@
-
 Git commands:
 git pull 		(Should be done before you start working, and before pushing work)
 git status		(See what files you have changed(in red), and which is in add buffer(in green))
