@@ -1,0 +1,25 @@
+Class MultiQuestion{
+	int id
+	String Questions
+	Image
+	Array<Pair> multiCho 
+	int anw 4;
+}
+
+
+{
+	Question = "Who is the person in the picture?";
+	multiCho new Array<String,Int>;
+	multiCho.add("Adolf Hilter", -1);
+	multiCho.add("Frans Ferdian", 1);
+	multiCho.add("Willy", 1);
+	multiCho.add("Gavrilo Princip", 1);
+}
+
+CONST FLOAT maxscore = 100.f;
+float score = 0;
+
+	
+	score += count(correct)/anw;
+	
+	
