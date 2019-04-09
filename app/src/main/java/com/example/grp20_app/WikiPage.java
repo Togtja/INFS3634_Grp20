@@ -1,6 +1,8 @@
 package com.example.grp20_app;
 
-public class WikiPage {
+import java.io.Serializable;
+
+public class WikiPage implements Serializable {
     int pageId;
     String title;
     String text;

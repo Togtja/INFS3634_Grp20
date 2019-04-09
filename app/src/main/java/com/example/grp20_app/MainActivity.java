@@ -6,8 +6,14 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.Serializable;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,50 +25,65 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
-    private ArrayList<WikiPage> wikipages;
+    private WikiPage wikipage;
     private WikiPageFragment wikifrag;
+    private String pageId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Type type =  new TypeToken<List<WikiPage>>(){}.getType();
+        pageId = "4764461";
+        Type type = new TypeToken<WikiPage>() {
+        }.getType();
         Gson gsonBuilder = new GsonBuilder()
                 .registerTypeAdapter(type, new WikiPageDestabilizer())
                 .create();
 
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://en.wikipedia.org/w/api.php")
+                .baseUrl("https://en.wikipedia.org/w/")
                 .addConverterFactory(GsonConverterFactory.create(gsonBuilder))
                 .build();
 
 
         WikiApi client = retrofit.create(WikiApi.class);
-        Call<ArrayList<WikiPage>> call = client.keyOfUser("query", "4764461","extract","jsonfm");
-        call.enqueue(new Callback<ArrayList<WikiPage>>(){
+        Call<WikiPage> call = client.keyOfUser("query", pageId, "extracts", "true","json");
+        call.enqueue(new Callback<WikiPage>() {
 
             @Override
-            public void onResponse(Call<ArrayList<WikiPage>> call, Response<ArrayList<WikiPage>> response) {
-                wikipages = new ArrayList<>();
-                wikipages = response.body();
-                setContentView(R.layout.activity_main);
+            public void onResponse(Call<WikiPage> call, Response<WikiPage> response) {
+                //wikipage = new WikiPage();
+                wikipage = response.body();
+                setContentView(R.layout.maintemp);
 
                 Bundle bundle = new Bundle();
                 //A cheat class to easily serialize a bundle
-                bundle.putSerializable("key_beer", new BundleWikiPageArray((ArrayList<WikiPage>) wikipages).getWikiPages());
-               wikifrag = new WikiPageFragment();
+                bundle.putSerializable("key_beer", wikipage);
+                wikifrag = new WikiPageFragment();
                 wikifrag.setArguments(bundle);
                 getSupportFragmentManager().beginTransaction()
-                        .add(R.id.WikiFragment, wikifrag)
+                        .add(R.id.wikifrag, wikifrag)
                         .commit();
 
             }
 
             @Override
-            public void onFailure(Call<ArrayList<WikiPage>> call, Throwable t) {
+            public void onFailure(Call<WikiPage> call, Throwable t) {
                 t.printStackTrace();
             }
         });
 
 
+    }
+
+    class WikiPageDestabilizer implements JsonDeserializer<WikiPage> {
+
+        @Override
+        public WikiPage deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+            JsonObject jobj = json.getAsJsonObject().get("query").getAsJsonObject().get("pages").getAsJsonObject().get(pageId).getAsJsonObject();
+            if(jobj == null){
+                Log.d("NULL", "jobj is null");
+            }
+            return new WikiPage(jobj.get("pageid").getAsInt(), jobj.get("title").getAsString(), jobj.get("extract").getAsString());
+        }
     }
 }

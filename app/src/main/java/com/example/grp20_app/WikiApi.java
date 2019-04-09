@@ -9,5 +9,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 public interface WikiApi {
-    Call<ArrayList<WikiPage>> keyOfUser(@Query("action") String action, @Query("pageids") String pageids, @Query("prop") String prop, @Query("format") String format);
+    @GET("api.php/")
+    Call<WikiPage> keyOfUser(@Query("action") String action, @Query("pageids") String pageids,
+                             @Query("prop") String prop,@Query("exintro") String bool ,@Query("format") String format);
 }
