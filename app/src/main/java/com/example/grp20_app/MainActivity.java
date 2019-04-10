@@ -26,7 +26,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
     private WikiPage wikipage;
-    private WikiPageFragment wikifrag;
+    private WW1MainListFragment wikifrag;
     private String pageId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +57,8 @@ public class MainActivity extends AppCompatActivity {
 
                 Bundle bundle = new Bundle();
                 //A cheat class to easily serialize a bundle
-                bundle.putSerializable("key_beer", wikipage);
-                wikifrag = new WikiPageFragment();
+                bundle.putSerializable("key_wiki", wikipage);
+                wikifrag = new WW1MainListFragment();
                 wikifrag.setArguments(bundle);
                 getSupportFragmentManager().beginTransaction()
                         .add(R.id.wikifrag, wikifrag)
