@@ -1,10 +1,16 @@
 package com.example.grp20_app;
 
+import android.app.Activity;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,9 +23,12 @@ import java.util.ArrayList;
 
 public class WW1MainListRecyclerView extends RecyclerView.Adapter<WW1MainListRecyclerView.ViewHolder> {
     private  ArrayList<Pair<String,Integer>> arrayPair;
-    private Context context;
-    public WW1MainListRecyclerView(ArrayList<Pair<String, Integer>> arrayPair) {
+    private ArrayList<PairWikiPage> wikiPages;
+    private FragmentManager fragmentManager;
+    public WW1MainListRecyclerView(FragmentManager fragmentManager, ArrayList<Pair<String, Integer>> arrayPair, ArrayList<PairWikiPage> wikiPages) {
+        this.fragmentManager = fragmentManager;
         this.arrayPair = arrayPair;
+        this.wikiPages = wikiPages;
     }
 
     @NonNull
@@ -27,20 +36,26 @@ public class WW1MainListRecyclerView extends RecyclerView.Adapter<WW1MainListRec
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.ww1_mainpage, viewGroup, false);
-        context = viewGroup.getContext();
-        //WW1MainListRecyclerView.ViewHolder vh = new WW1MainListRecyclerView.ViewHolder(v);
         return new ViewHolder(v);
 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
         viewHolder.name.setText(arrayPair.get(i).first);
         viewHolder.image.setImageResource(arrayPair.get(i).second);
         viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Open new Activity
+                WikiPageFragment wikiPageFragment = new WikiPageFragment();
+                Bundle b = new Bundle();
+                b.putSerializable("wiki",wikiPages.get(0));
+                wikiPageFragment.setArguments(b);
+                fragmentManager.beginTransaction()
+                .replace(R.id.wikifrag, wikiPageFragment).addToBackStack(null)
+                .commit();
+
+
             }
         });
     }
