@@ -1,5 +1,6 @@
 package com.example.grp20_app;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 public class WW1QuizRecyclerView extends RecyclerView.Adapter<WW1QuizRecyclerView.ViewHolder> {
     FragmentManager fragmentManager;
     private ArrayList<String> quizzes;
+    Context context;
     WW1QuizRecyclerView(FragmentManager fragmentManager, ArrayList<String> quizzes){
         this.fragmentManager = fragmentManager;
         this.quizzes = quizzes;
@@ -27,6 +29,7 @@ public class WW1QuizRecyclerView extends RecyclerView.Adapter<WW1QuizRecyclerVie
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.ww1_quizlist, viewGroup, false);
+        context = viewGroup.getContext();
         return new WW1QuizRecyclerView.ViewHolder(v);
     }
 
@@ -66,7 +69,7 @@ public class WW1QuizRecyclerView extends RecyclerView.Adapter<WW1QuizRecyclerVie
                         return;
                 }
                 Bundle b = new Bundle();
-                b.putSerializable("quiz", WW1Quiz.getBuildUpQuiz());
+                b.putSerializable("quiz", WW1Quiz.getBuildUpQuiz(context));
                 ArrayList<Integer> quizStuff = new ArrayList<>();
                 quizStuff.add(0); //Quiz Nr
                 quizStuff.add(0); //CurrXp

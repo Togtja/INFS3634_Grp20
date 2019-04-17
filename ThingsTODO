@@ -1,0 +1,23 @@
+Known Bugs
+If you tap to a wikipage before the wikipage list have loaded you crash the App
+
+You can tap backward in question, (It should save your progess on that quiz and throw you out to quiz selection, and then allow you to go back into the same quiz with the progess saved)
+
+HTML fixing for wikipages
+
+
+
+things left to implemtet
+
+A lot of questions for the quizzes
+
+More wikipages for our wikipedia
+A form of storage system
+
+User info, such as Lvl, xp etc
+
+
+If time allows it
+
+Slow to load the wiki sites, so try to speed it up
+Add the sections from the WikiAPI 

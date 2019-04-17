@@ -1,6 +1,8 @@
 package com.example.grp20_app;
 
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Pair;
 
 import java.util.ArrayList;
@@ -89,7 +91,7 @@ public class WW1Quiz {
         this.id = id;
     }
 
-    static ArrayList<WW1Quiz> getBuildUpQuiz(){
+    static ArrayList<WW1Quiz> getBuildUpQuiz(Context context){
         ArrayList<WW1Quiz> ret = new ArrayList<>();
         //Question 1
             //options for questions
@@ -98,8 +100,12 @@ public class WW1Quiz {
         options.add(new Pair<>(0 , "Not me"));
         options.add(new Pair<>(1 , "But it's me Dio"));
         options.add(new Pair<>(0 , "Yahh no, not me"));
+
+        //Optonal photo
+        Bitmap icon = BitmapFactory.decodeResource(context.getResources(),
+                R.drawable.archyduke);
         //Actually adding the question
-        ret.add(new WW1Quiz(0, "Hey It's a Test Question", options, Bitmap.createBitmap()));
+        ret.add(new WW1Quiz(0, "Hey It's a Test Question", options, icon));
 
         //Question 2
         //options for questions
