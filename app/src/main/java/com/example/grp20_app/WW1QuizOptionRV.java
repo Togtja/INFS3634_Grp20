@@ -1,5 +1,6 @@
 package com.example.grp20_app;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
@@ -21,6 +22,7 @@ public class WW1QuizOptionRV extends RecyclerView.Adapter<WW1QuizOptionRV.ViewHo
     int currXp;
     int currScore;
     int currStrike;
+    Context context;
     WW1QuizOptionRV(FragmentManager fragmentManager,ArrayList<Pair<Integer,String>> quizzes, int questionNr, int currXp, int currScore, int currStrike){
         this.fragmentManager = fragmentManager;
         this.options = quizzes;
@@ -36,6 +38,7 @@ public class WW1QuizOptionRV extends RecyclerView.Adapter<WW1QuizOptionRV.ViewHo
     public WW1QuizOptionRV.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.ww1_quiz_btn, viewGroup, false);
+        context = viewGroup.getContext();
         return new WW1QuizOptionRV.ViewHolder(v);
     }
 
@@ -48,7 +51,7 @@ public class WW1QuizOptionRV extends RecyclerView.Adapter<WW1QuizOptionRV.ViewHo
             public void onClick(View v) {
                 if(options.get(i).first == 1){
                     currScore += 100;
-                    currXp += (100 * (1 + currStrike/10));
+                    currXp += (int) (100.f * (1.f + ((float)currStrike/10.f)));
                     currStrike +=1;
                 }
                 else{
@@ -57,7 +60,7 @@ public class WW1QuizOptionRV extends RecyclerView.Adapter<WW1QuizOptionRV.ViewHo
                     //Give 0 points and no xp
                 }
                 Bundle b = new Bundle();
-                b.putSerializable("quiz", WW1Quiz.getBuildUpQuiz());
+                b.putSerializable("quiz", WW1Quiz.getBuildUpQuiz(context));
                 ArrayList<Integer> quizStuff = new ArrayList<>();
                 quizStuff.add(qNr + 1); //Quiz Nr
                 quizStuff.add(currXp); //CurrXp

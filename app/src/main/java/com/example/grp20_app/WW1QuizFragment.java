@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -41,6 +42,13 @@ public class WW1QuizFragment extends Fragment {
         }
         if(qStuff.get(0) >= quiz.size()){
             return null;
+        }
+        ImageView imageView = view.findViewById(R.id.imageView);
+        if(quiz.get(qStuff.get(0)) != null){
+            imageView.setImageBitmap(quiz.get(qStuff.get(0)).getImage());
+        }
+        else{
+            imageView.setVisibility(View.INVISIBLE);
         }
         questions.setText(quiz.get(qStuff.get(0)).getQuestion());
         score = view.findViewById(R.id.score);
