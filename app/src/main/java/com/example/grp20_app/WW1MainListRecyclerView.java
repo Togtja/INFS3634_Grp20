@@ -53,16 +53,19 @@ public class WW1MainListRecyclerView extends RecyclerView.Adapter<WW1MainListRec
         viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //This means it is quiz
+                if(i == wikiSites.size()){
 
-
-                final WW1SubListFragment ww1SubListFragment = new WW1SubListFragment();
-                final Bundle b = new Bundle();
-                b.putSerializable("wiki", wikiSites.get(i));
-                ww1SubListFragment.setArguments(b);
-                fragmentManager.beginTransaction()
-                        .replace(R.id.wikifrag, ww1SubListFragment).addToBackStack(null)
-                        .commit();
-
+                }
+                else {
+                    final WW1SubListFragment ww1SubListFragment = new WW1SubListFragment();
+                    final Bundle b = new Bundle();
+                    b.putSerializable("wiki", wikiSites.get(i));
+                    ww1SubListFragment.setArguments(b);
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.wikifrag, ww1SubListFragment).addToBackStack(null)
+                            .commit();
+                }
 
             }
 
