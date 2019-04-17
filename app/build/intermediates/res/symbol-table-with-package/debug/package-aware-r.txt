@@ -791,6 +791,8 @@ id progress_horizontal
 id question
 id question_number
 id quit
+id quizList_cv
+id quizList_text
 id radio
 id right
 id right_icon
@@ -913,6 +915,7 @@ layout wiki_fragment_view
 layout wiki_page
 layout ww1_main_list_view
 layout ww1_mainpage
+layout ww1_quizlist
 mipmap ic_launcher
 mipmap ic_launcher_round
 string abc_action_bar_home_description

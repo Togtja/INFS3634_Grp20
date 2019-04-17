@@ -55,7 +55,12 @@ public class WW1MainListRecyclerView extends RecyclerView.Adapter<WW1MainListRec
             public void onClick(View v) {
                 //This means it is quiz
                 if(i == wikiSites.size()){
+                    WW1QuizFragment ww1QuizFragment = new WW1QuizFragment();
+                    //Make bundle if we need to
 
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.wikifrag, ww1QuizFragment).addToBackStack(null)
+                            .commit();
                 }
                 else {
                     final WW1SubListFragment ww1SubListFragment = new WW1SubListFragment();
