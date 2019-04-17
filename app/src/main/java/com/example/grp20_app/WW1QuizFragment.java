@@ -6,36 +6,54 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class WW1QuizFragment extends Fragment {
-    RecyclerView quizRecycler;
-    WW1QuizRecyclerView mAdapter;
+    TextView score;
+    RecyclerView options;
+    WW1QuizOptionRV mAdapter;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        super.onCreateView(inflater, container, savedInstanceState);
+        View view = inflater.inflate(R.layout.multiple_choice, container, false);
 
-        View view = inflater.inflate(R.layout.ww1_main_list_view, container, false);
+        Bundle bundle = getArguments();
+        if (bundle == null) {return null;}
+        ArrayList<WW1Quiz> quiz = (ArrayList<WW1Quiz>) bundle.getSerializable("quiz");
+        ArrayList<Integer> qStuff = (ArrayList<Integer>) bundle.getSerializable("q_nr");
+        /*
+                quizStuff(0); //Quiz Nr
+                quizStuff(1); //CurrXp
+                quizStuff(2); //Score
+                quizStuff(3); //Strike
+         */
 
+        TextView questions =  view.findViewById(R.id.quiz_question);
+        if(questions == null){
+            Log.d("Null?", "Ummmm, how?");
+        }
+        if(qStuff.get(0) >= quiz.size()){
+            return null;
+        }
+        questions.setText(quiz.get(qStuff.get(0)).getQuestion());
+        score = view.findViewById(R.id.score);
+        score.setText(Integer.toString(qStuff.get(2)));
+        TextView q_num = view.findViewById(R.id.question_number);
+        q_num.setText(Integer.toString(qStuff.get(0)+ 1));
+        options = view.findViewById(R.id.quiz_buttons_rv);
+        options.setHasFixedSize(true);
 
-        quizRecycler = view.findViewById(R.id.ww1_main_rv);
-        quizRecycler.setHasFixedSize(true);
+        options.setLayoutManager(new GridLayoutManager(getContext(), 1));
 
-        quizRecycler.setLayoutManager(new GridLayoutManager(getContext(), 1));
-
-        //Sends in the list of available quizzes
-        ArrayList<String> test_list = new ArrayList<>();
-        test_list.add("Quiz About 1914");
-        test_list.add("Quiz About 1915");
-        mAdapter = new WW1QuizRecyclerView(test_list);
-
-        quizRecycler.setAdapter(mAdapter);
-
+        mAdapter = new WW1QuizOptionRV(getFragmentManager(),quiz.get(qStuff.get(0)).getAnswer(), qStuff.get(0), qStuff.get(1), qStuff.get(2), qStuff.get(3));
+        options.setAdapter(mAdapter);
         return view;
     }
 }

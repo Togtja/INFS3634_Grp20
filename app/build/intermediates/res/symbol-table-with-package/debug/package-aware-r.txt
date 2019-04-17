@@ -719,9 +719,6 @@ id alertTitle
 id all
 id always
 id answer1
-id answer2
-id answer3
-id answer4
 id async
 id barrier
 id beginning
@@ -788,11 +785,12 @@ id parentPanel
 id percent
 id progress_circular
 id progress_horizontal
-id question
 id question_number
 id quit
 id quizList_cv
 id quizList_text
+id quiz_buttons_rv
+id quiz_question
 id radio
 id right
 id right_icon
@@ -864,6 +862,8 @@ id ww1_cvCard
 id ww1_cvimg
 id ww1_cvtxt
 id ww1_main_rv
+id ww1_quizlist_fL
+id ww1_quizlist_rv
 integer abc_config_activityDefaultDur
 integer abc_config_activityShortDur
 integer cancel_button_image_alpha
@@ -915,6 +915,8 @@ layout wiki_fragment_view
 layout wiki_page
 layout ww1_main_list_view
 layout ww1_mainpage
+layout ww1_quiz_btn
+layout ww1_quiz_fragment
 layout ww1_quizlist
 mipmap ic_launcher
 mipmap ic_launcher_round

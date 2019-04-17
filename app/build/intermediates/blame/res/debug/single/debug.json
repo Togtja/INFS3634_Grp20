@@ -128,6 +128,10 @@
         "source": "/home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml"
     },
     {
+        "merged": "/home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/build/intermediates/res/merged/debug/layout_ww1_quiz_btn.xml.flat",
+        "source": "/home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/src/main/res/layout/ww1_quiz_btn.xml"
+    },
+    {
         "merged": "/home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_tab_indicator_mtrl_alpha.9.png.flat",
         "source": "/home/tomas/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/f5cc5659ecc6bf8880bc876ab516bb59/res/drawable-hdpi-v4/abc_tab_indicator_mtrl_alpha.9.png"
     },
@@ -286,6 +290,10 @@
     {
         "merged": "/home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_ic_star_black_48dp.png.flat",
         "source": "/home/tomas/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/f5cc5659ecc6bf8880bc876ab516bb59/res/drawable-hdpi-v4/abc_ic_star_black_48dp.png"
+    },
+    {
+        "merged": "/home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/build/intermediates/res/merged/debug/layout_ww1_quiz_fragment.xml.flat",
+        "source": "/home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/src/main/res/layout/ww1_quiz_fragment.xml"
     },
     {
         "merged": "/home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/build/intermediates/res/merged/debug/layout_abc_screen_simple_overlay_action_mode.xml.flat",
