@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,17 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class WW1MainListRecyclerView extends RecyclerView.Adapter<WW1MainListRecyclerView.ViewHolder> {
     private  ArrayList<Pair<String,Integer>> arrayPair;
@@ -55,11 +44,11 @@ public class WW1MainListRecyclerView extends RecyclerView.Adapter<WW1MainListRec
             public void onClick(View v) {
                 //This means it is quiz
                 if(i == wikiSites.size()){
-                    WW1QuizFragment ww1QuizFragment = new WW1QuizFragment();
+                    WW1QuizListFragment ww1QuizListFragment = new WW1QuizListFragment();
                     //Make bundle if we need to
 
                     fragmentManager.beginTransaction()
-                            .replace(R.id.wikifrag, ww1QuizFragment).addToBackStack(null)
+                            .replace(R.id.wikifrag, ww1QuizListFragment).addToBackStack(null)
                             .commit();
                 }
                 else {
