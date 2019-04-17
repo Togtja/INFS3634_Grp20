@@ -27,7 +27,7 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_gravity="center"
-                app:srcCompat="@drawable/archyduke" />
+                app:srcCompat="@android:drawable/ic_menu_gallery" />
 
         </LinearLayout>
 
