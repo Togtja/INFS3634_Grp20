@@ -28,6 +28,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.example.grp20_app.CreateUserProfile"
+            android:parentActivityName="com.example.grp20_app.MainActivity" >
+        </activity>
+        <activity
+            android:name="com.example.grp20_app.WW1DisplayProfile"
+            android:parentActivityName="com.example.grp20_app.MainActivity" >
+        </activity>
     </application>
 
 </manifest>

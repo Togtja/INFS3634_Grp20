@@ -15,12 +15,15 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class WW1QuizRecyclerView extends RecyclerView.Adapter<WW1QuizRecyclerView.ViewHolder> {
-    FragmentManager fragmentManager;
+    private FragmentManager fragmentManager;
     private ArrayList<String> quizzes;
+    private WW1UserProfile user;
+
     Context context;
-    WW1QuizRecyclerView(FragmentManager fragmentManager, ArrayList<String> quizzes){
+    WW1QuizRecyclerView(FragmentManager fragmentManager, ArrayList<String> quizzes/*, WW1UserProfile user*/){
         this.fragmentManager = fragmentManager;
         this.quizzes = quizzes;
+        //this.user = user;
 
     }
 
@@ -34,7 +37,7 @@ public class WW1QuizRecyclerView extends RecyclerView.Adapter<WW1QuizRecyclerVie
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
+    public void onBindViewHolder(@NonNull final ViewHolder viewHolder, final int i) {
         viewHolder.text.setText(quizzes.get(i));
         viewHolder.card.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,7 +75,7 @@ public class WW1QuizRecyclerView extends RecyclerView.Adapter<WW1QuizRecyclerVie
                 b.putSerializable("quiz", WW1Quiz.getBuildUpQuiz(context));
                 ArrayList<Integer> quizStuff = new ArrayList<>();
                 quizStuff.add(0); //Quiz Nr
-                quizStuff.add(0); //CurrXp
+                quizStuff.add(MainActivity.GLOBAL_PROFILE.getCurrXP()); //CurrXp
                 quizStuff.add(0); //Score
                 quizStuff.add(0); //Strike
                 b.putSerializable("q_nr", quizStuff);

@@ -72,15 +72,20 @@ public class WW1MainListFragment extends Fragment {
 
         //Add to list
         wikiPages.add(ww1_buildUp);
-        wikiPages.add(ww1_afterMatch);
         wikiPages.add(ww1_1914);
         wikiPages.add(ww1_1915);
         wikiPages.add(ww1_1916);
         wikiPages.add(ww1_1917);
         wikiPages.add(ww1_1918);
+        wikiPages.add(ww1_afterMatch);
 
         Bundle b =  getArguments();
-        ArrayList<Pair<String, Integer>> list = (ArrayList<Pair<String, Integer>>) b.getSerializable("list");
+        ArrayList<String> s = (ArrayList<String>) b.getSerializable("name");
+        ArrayList<Integer> i = (ArrayList<Integer>) b.getSerializable("draw");
+        ArrayList<Pair<String, Integer>> list = new ArrayList<>();
+        for(int x = 0; x < s.size(); x++){
+            list.add(new Pair<>(s.get(x), i.get(x)));
+        }
         FragmentManager fragmentManager = getFragmentManager();
         mAdapter = new WW1MainListRecyclerView(fragmentManager, list, wikiPages);
 

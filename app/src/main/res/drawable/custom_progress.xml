@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Thanks to Fabian Almaraz for this custom progress bar
+got from https://stackoverflow.com/questions/12920397/how-to-make-progressbar-stop-spinning -->
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@android:id/background">
         <shape
@@ -7,7 +9,7 @@
             android:useLevel="false"
             android:type="sweep"
             android:thicknessRatio="15.0">
-            <solid android:color="#0099ff"/>
+            <solid android:color="#E4C5C5"/>
         </shape>
     </item>
     <item android:id="@android:id/progress">
@@ -22,7 +24,7 @@
                 android:angle="0"
                 android:type="sweep"
                 android:thicknessRatio="15.0">
-                <solid android:color="#e0e0e0"/>
+                <solid android:color="#D900FF"/>
             </shape>
         </rotate>
     </item>

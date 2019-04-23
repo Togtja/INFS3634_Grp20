@@ -1,10 +1,16 @@
 package com.example.grp20_app;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Pair;
+import android.view.View;
 
 
 import com.google.gson.GsonBuilder;
@@ -15,6 +21,9 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.lang.reflect.Type;
 
 import java.util.ArrayList;
@@ -32,48 +41,60 @@ import retrofit2.converter.gson.GsonConverterFactory;
 * */
 public class MainActivity extends AppCompatActivity {
     private WW1MainListFragment wikifrag;
-    WikiPage wikipage;
-    private String pageId;
+    public static WW1UserProfile GLOBAL_PROFILE;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.maintemp);
-        ArrayList<Pair<String, Integer>> list = new ArrayList<>();
-        //Make the list
-        String s = "Build up";
-        Integer i = R.drawable.ww1start;
-        list.add(new Pair<>(s, i));
-        s = "1914";
-        i = R.drawable.archyduke;
-        list.add(new Pair<>(s, i));
-        s = "1915";
-        i = R.drawable.capehelles;
-        list.add(new Pair<>(s, i));
-        s = "1916";
-        i = R.drawable.ww1h;
-        list.add(new Pair<>(s, i));
-        s = "1917";
-        i = R.drawable.ww13;
-        list.add(new Pair<>(s, i));
-        s = "1918";
-        i = R.drawable.ww2end;
-        list.add(new Pair<>(s, i));
-        s = "After Match";
-        i = R.drawable.peaceww1;
-        list.add(new Pair<>(s, i));
-        s = "Quiz";
-        i = R.drawable.quizicon;
-        list.add(new Pair<>(s, i));
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("list", list);
+        GLOBAL_PROFILE = WW1UserProfile.getData(getApplicationContext());
+        if(GLOBAL_PROFILE == null){
+            //Create Profile
+            startActivity(new Intent(this, CreateUserProfile.class));
+        }
+        else {
+            ArrayList<String> s = new ArrayList<>();
+            ArrayList<Integer> i = new ArrayList<>();
+            //Make the list
+            s.add("Build up");
+            i.add(R.drawable.ww1start);
 
-        wikifrag = new WW1MainListFragment();
-        wikifrag.setArguments(bundle);
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.wikifrag, wikifrag)
-                .commit();
+            s.add("1914");
+            i.add(R.drawable.archyduke);
 
+            s.add("1915");
+            i.add(R.drawable.capehelles);
+
+            s.add("1916");
+            i.add(R.drawable.ww1h);
+
+            s.add("1917");
+            i.add(R.drawable.ww13);
+
+            s.add("1918");
+            i.add(R.drawable.ww2end);
+
+            s.add("After Match");
+            i.add(R.drawable.peaceww1);
+
+            s.add("Quiz");
+            i.add(R.drawable.quizicon);
+
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("name", s);
+            bundle.putSerializable("draw", i);
+
+            wikifrag = new WW1MainListFragment();
+            wikifrag.setArguments(bundle);
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.wikifrag, wikifrag)
+                    .commit();
+        }
+
+
+    }
+    public void OpenProfile(View view){
+        startActivity(new Intent(this, WW1DisplayProfile.class));
     }
 
     static class WikiPageDeserializer implements JsonDeserializer<WikiPage> {

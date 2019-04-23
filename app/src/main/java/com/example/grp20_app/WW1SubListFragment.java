@@ -48,7 +48,6 @@ public class WW1SubListFragment extends Fragment {
 
         FragmentManager fragmentManager = getFragmentManager();
         mAdapter = new WW1SubListRecyclerView(fragmentManager, wikiPages);
-
         ww1MainList.setAdapter(mAdapter);
         return view;
 

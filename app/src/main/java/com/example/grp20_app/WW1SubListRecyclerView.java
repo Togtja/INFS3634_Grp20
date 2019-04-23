@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.gson.GsonBuilder;
@@ -58,6 +59,8 @@ public class WW1SubListRecyclerView extends RecyclerView.Adapter<WW1SubListRecyc
 
     @Override
     public void onBindViewHolder(@NonNull final WW1SubListRecyclerView.ViewHolder viewHolder, final int i) {
+        viewHolder.cardView.setVisibility(View.GONE); //Make it invisible till we have loaded it
+
         Type type = new TypeToken<WikiPage>() {
         }.getType();
         WikiApi pageClient = new Retrofit.Builder()
@@ -77,24 +80,29 @@ public class WW1SubListRecyclerView extends RecyclerView.Adapter<WW1SubListRecyc
                 viewHolder.name.setText(wikiPage.get(i).getTitle());
                 ImageView imageView = viewHolder.image;
                 if (wikiPage.get(i).getImgURL() != null) {
-                    new DownloadBitMap().execute(new Pair<>(wikiPage.get(i), imageView));
+                    DownloadBitMap dbm = new DownloadBitMap();
+                    dbm.execute(new TheViews(imageView, wikiPage.get(i), viewHolder.cardView, viewHolder.progressBar));
                 }
-
+                else{
+                    viewHolder.cardView.setVisibility(View.VISIBLE);
+                    viewHolder.progressBar.setVisibility(View.GONE);
+                }
 
 
                 viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(View v) {
-                        //Give wikiPage to wikiPageFragment
+                    public void onClick(View v) {//Give wikiPage to wikiPageFragment
                         final WikiPageFragment wpf = new WikiPageFragment();
                         final Bundle b = new Bundle();
                         b.putSerializable("wiki", wikiPage.get(i));
                         wpf.setArguments(b);
                         fragmentManager.beginTransaction()
                                 .replace(R.id.wikifrag, wpf).addToBackStack(null)
-                                .commit();
-                    }
+                                .commit(); }
                 });
+
+
+
             }
 
             @Override
@@ -116,23 +124,30 @@ public class WW1SubListRecyclerView extends RecyclerView.Adapter<WW1SubListRecyc
         TextView name;
         ImageView image;
         CardView cardView;
+        ProgressBar progressBar;
 
         public ViewHolder(View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.ww1_cvtxt);
             image = itemView.findViewById(R.id.ww1_cvimg);
             cardView = itemView.findViewById(R.id.ww1_cvCard);
+            progressBar = itemView.findViewById(R.id.ww1_loading);
         }
     }
-    class DownloadBitMap extends AsyncTask<Pair<WikiPage, ImageView>, Void, Bitmap> {
+    class DownloadBitMap extends AsyncTask<TheViews, Void, Bitmap> {
         ImageView imageV;
         WikiPage wikiPage;
+        private CardView cv;
+        private ProgressBar pBar;
         @Override
-        protected Bitmap doInBackground(Pair<WikiPage, ImageView> ... pairs) {
+        protected Bitmap doInBackground(TheViews ... views) {
             try {
-                imageV = pairs[0].second;
-                wikiPage = pairs[0].first;
-                URL url = new URL(pairs[0].first.getImgURL());
+                imageV = views[0].getImageV();
+                wikiPage = views[0].getWikiPage();
+                cv = views[0].getCv();
+                pBar= views[0].getpBar();
+
+                URL url = new URL(wikiPage.getImgURL());
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setDoInput(true);
                 connection.connect();
@@ -149,7 +164,38 @@ public class WW1SubListRecyclerView extends RecyclerView.Adapter<WW1SubListRecyc
         protected void onPostExecute(Bitmap bitmap) {
             imageV.setImageBitmap(bitmap);
             wikiPage.setImage(bitmap);
+            cv.setVisibility(View.VISIBLE);
+            pBar.setVisibility(View.GONE);
         }
     }
 
+    private class TheViews {
+        private ImageView imageV;
+        private WikiPage wikiPage;
+        private CardView cv;
+        private ProgressBar pBar;
+
+        private TheViews(ImageView imageV, WikiPage wikiPage, CardView cv, ProgressBar pBar) {
+            this.imageV = imageV;
+            this.wikiPage = wikiPage;
+            this.cv = cv;
+            this.pBar = pBar;
+        }
+
+        public ImageView getImageV() {
+            return imageV;
+        }
+
+        public WikiPage getWikiPage() {
+            return wikiPage;
+        }
+
+        public CardView getCv() {
+            return cv;
+        }
+
+        public ProgressBar getpBar() {
+            return pBar;
+        }
+    }
 }

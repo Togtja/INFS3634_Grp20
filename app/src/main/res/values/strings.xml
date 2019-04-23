@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">World War 1: The App</string>
+    <string name="app_name">Qvasir: WW1</string>
+    <string name="submit">Sumbit</string>
+    <string name="delete_btn">Delete Profile</string>
+    <string name="delete_info">This will delete the profile.\n
+        However a profile is required to use the app\n
+    We only store internally on your phone and have no access to any data you provide</string>
 </resources>

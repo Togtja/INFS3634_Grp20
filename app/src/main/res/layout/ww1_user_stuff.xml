@@ -1,40 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <FrameLayout
         android:id="@+id/frameLayout2"
-        android:layout_width="407dp"
-        android:layout_height="119dp"
-        android:layout_marginTop="4dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:background="#09c6df"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/imageView2"
+        <ImageButton
+            android:id="@+id/profilePhoto"
             android:layout_width="124dp"
             android:layout_height="127dp"
+            android:onClick="OpenProfile"
+            android:scaleType="fitCenter"
             app:srcCompat="@drawable/francisferd" />
 
         <RelativeLayout
+            android:id="@+id/Relativelayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/name"
+                android:id="@+id/userName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="150dp"
-                android:layout_marginLeft="150dp"
-                android:layout_marginTop="25dp"
+                android:layout_marginStart="131dp"
+                android:layout_marginLeft="131dp"
+                android:layout_marginTop="27dp"
                 android:text="Name"
                 android:textColor="#fff"
                 android:textSize="22dp" />
@@ -46,50 +49,57 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="139dp"
-                android:layout_marginLeft="139dp"
-                android:layout_marginTop="63dp"
+                android:layout_marginStart="129dp"
+                android:layout_marginLeft="129dp"
+                android:layout_marginTop="61dp"
                 android:alpha="0.7"
                 android:text="Farmer"
                 android:textColor="#fff"
                 android:textSize="18sp" />
 
+            <TextView
+                android:id="@+id/user_level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="9dp"
+                android:layout_marginLeft="9dp"
+                android:layout_marginTop="65dp"
+                android:layout_toEndOf="@+id/title"
+                android:layout_toRightOf="@+id/title"
+                android:alpha="0.7"
+                android:text="Level 99"
+                android:textColor="#fff"
+                android:textSize="14sp" />
+
             <ProgressBar
                 android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="93dp"
                 android:layout_height="102dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="299dp"
-                android:layout_marginLeft="299dp"
-                android:layout_marginTop="17dp" />
+                android:layout_marginStart="301dp"
+                android:layout_marginLeft="301dp"
+                android:layout_marginTop="17dp"
+                android:indeterminate="false"
+                android:max="100"
+                android:progressDrawable="@drawable/custom_progress" />
 
             <TextView
                 android:id="@+id/text_XP"
-                android:layout_width="90dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="300dp"
-                android:layout_marginLeft="300dp"
-                android:layout_marginTop="8dp"
-                android:text="XP" />
+                android:layout_marginStart="315dp"
+                android:layout_marginLeft="315dp"
+                android:layout_marginTop="2dp"
+                android:text="11/100 XP" />
+
         </RelativeLayout>
     </FrameLayout>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/ww1_quizlist_rv"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frameLayout2" />
 
 </android.support.constraint.ConstraintLayout>
