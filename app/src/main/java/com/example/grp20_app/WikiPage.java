@@ -8,13 +8,16 @@ import android.util.Pair;
 import java.io.Serializable;
 
 import java.util.ArrayList;
+/*
+This stores all the information for a single wikipedia page
 
+ */
 public class WikiPage implements Serializable {
-    private int pageId;
-    private String title;
-    private String text;
-    private String imgURL;
-    private Bitmap image;
+    private int pageId; //The ID for the page (Mostly useless)
+    private String title; //Title of the wikipedia page
+    private String text;    //The a extracted section of the page
+    private String imgURL;  //The URL to the thumbnail
+    private Bitmap image;   //A bitmap of the thumnail after we have downloaded it
     private ArrayList<Pair<String, String>> sections;
 
     public WikiPage(int pageId, String title, String text, String imageUrl){
@@ -22,16 +25,6 @@ public class WikiPage implements Serializable {
         this.title = title;
         this.text = text;
         imgURL = imageUrl;
-        image = null;
-
-
-    }
-    public WikiPage(int pageId, String title, String text, String imageUrl, ArrayList<Pair<String, String>> sections){
-        this.pageId = pageId;
-        this.title = title;
-        this.text = text;
-        imgURL = imageUrl;
-        this.sections = sections;
         image = null;
     }
 

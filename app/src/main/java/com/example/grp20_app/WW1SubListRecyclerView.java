@@ -71,7 +71,7 @@ public class WW1SubListRecyclerView extends RecyclerView.Adapter<WW1SubListRecyc
                 .build().create(WikiApi.class);
 
         Call<WikiPage> call = pageClient.wikiSite(wikiSites.get(i));
-        Log.d("Magic", "The nr is " + Integer.toString(i));
+        Log.d("Magic", "The nr is " + i);
         call.enqueue(new Callback<WikiPage>() {
 
             @Override
@@ -88,17 +88,22 @@ public class WW1SubListRecyclerView extends RecyclerView.Adapter<WW1SubListRecyc
                     viewHolder.progressBar.setVisibility(View.GONE);
                 }
 
-
                 viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {//Give wikiPage to wikiPageFragment
-                        final WikiPageFragment wpf = new WikiPageFragment();
-                        final Bundle b = new Bundle();
-                        b.putSerializable("wiki", wikiPage.get(i));
-                        wpf.setArguments(b);
-                        fragmentManager.beginTransaction()
-                                .replace(R.id.wikifrag, wpf).addToBackStack(null)
-                                .commit(); }
+                        Log.d("NULL", "This shouldn't happen :( nr is " + i);
+                        if (wikiPage.get(i) != null) {
+
+
+                            final WikiPageFragment wpf = new WikiPageFragment();
+                            final Bundle b = new Bundle();
+                            b.putSerializable("wiki", wikiPage.get(i));
+                            wpf.setArguments(b);
+                            fragmentManager.beginTransaction()
+                                    .replace(R.id.wikifrag, wpf).addToBackStack(null)
+                                    .commit();
+                        }
+                    }
                 });
 
 

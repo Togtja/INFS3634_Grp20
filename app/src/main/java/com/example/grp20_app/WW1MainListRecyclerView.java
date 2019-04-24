@@ -13,6 +13,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+/*
+* This class takes in an Array of Pairs of Stings and Integers
+* which the String represents a title and the int the drawable ID
+* And takes in an Array of Array of Wikipedia titles which we use to do API calls
+*
+* Based on what CardView holder you click on from the UI
+* We decided what gets sent to the SubListFragment and consequently get displayed there
+*
+* */
 
 public class WW1MainListRecyclerView extends RecyclerView.Adapter<WW1MainListRecyclerView.ViewHolder> {
     private  ArrayList<Pair<String,Integer>> arrayPair;
@@ -44,16 +53,17 @@ public class WW1MainListRecyclerView extends RecyclerView.Adapter<WW1MainListRec
             public void onClick(View v) {
                 //This means it is quiz
                 if(i == wikiSites.size()){
+                    //Just opens the Quiz Fragment (Maybe make Activity)
                     WW1QuizListFragment ww1QuizListFragment = new WW1QuizListFragment();
-                    //Make bundle if we need to
-
                     fragmentManager.beginTransaction()
                             .replace(R.id.wikifrag, ww1QuizListFragment).addToBackStack(null)
                             .commit();
                 }
                 else {
-                    final WW1SubListFragment ww1SubListFragment = new WW1SubListFragment();
-                    final Bundle b = new Bundle();
+                    WW1SubListFragment ww1SubListFragment = new WW1SubListFragment();
+                    //Bundle the Wikipages for that specific category
+                    //E.g Bundle the 1917 wikipages to the 1917 category
+                    Bundle b = new Bundle();
                     b.putSerializable("wiki", wikiSites.get(i));
                     ww1SubListFragment.setArguments(b);
                     fragmentManager.beginTransaction()
@@ -64,13 +74,6 @@ public class WW1MainListRecyclerView extends RecyclerView.Adapter<WW1MainListRec
             }
 
         });
-
-            /*
-            try {
-                wikiPages.add(call.execute().body());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }*/
 
 
     }
