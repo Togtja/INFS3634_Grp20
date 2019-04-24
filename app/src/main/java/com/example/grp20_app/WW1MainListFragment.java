@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 
 /*
 * Here we manually select what webpages should be apart of the app
+* (However we only need the title, the code does the rest)
 * We wanted to automate this, but the wiki API isn't powerful enough for tha yet
 * so we can't just select a ww1 category and run with it
 * It will then send the wikipedia pages to the recycler view who will call the API and display them
@@ -72,8 +73,16 @@ public class WW1MainListFragment extends Fragment {
         ww1_1918.add("Treaty_of_Brest-Litovsk_(Ukraine–Central_Powers)");
         ww1_1918.add("Battle_of_Rarańcza");
         ww1_1918.add("Operation_Faustschlag");
+        ww1_1918.add("Treaty_of_Brest-Litovsk");
+        ww1_1918.add("Spanish_flu");
+        ww1_1918.add("Spring_Offensive");
+
         //Websites for the after match
         ArrayList<String> ww1_afterMatch = new ArrayList<>();
+        ww1_afterMatch.add("Aftermath_of_World_War_I");//
+        ww1_afterMatch.add("Kingdom_of_Yugoslavia");
+        ww1_afterMatch.add("Paris_Peace_Conference,_1919");
+        ww1_afterMatch.add("Treaty_of_Versailles");
         ww1_afterMatch.add("1920_Schleswig_plebiscites");
 
         //Make an Array out of the arrays

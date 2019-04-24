@@ -995,6 +995,8 @@ drawable abc_vector_test
 drawable archyduke
 drawable avd_hide_password
 drawable avd_show_password
+drawable brestlit
+drawable brestlitrus
 drawable capehelles
 drawable custom_progress
 drawable design_bottom_navigation_item_background
@@ -1026,13 +1028,16 @@ drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
 drawable peaceww1
 drawable person
+drawable points14
 drawable quizicon
+drawable signingof_ppc
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
 drawable ww13
 drawable ww1h
 drawable ww1start
 drawable ww2end
+drawable yugoslav
 id ALT
 id CTRL
 id FUNCTION
@@ -1164,6 +1169,7 @@ id profileBtn
 id profileName
 id profilePhoto
 id progressBar
+id progressBar_MC
 id progress_circular
 id progress_horizontal
 id question_number

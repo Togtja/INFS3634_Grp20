@@ -1,6 +1,7 @@
 package com.example.grp20_app;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
@@ -10,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 
@@ -27,14 +29,16 @@ public class WW1QuizOptionRV extends RecyclerView.Adapter<WW1QuizOptionRV.ViewHo
     int currScore;//The current score for that quiz the user is taking
     int currStrike;//How many the user have managed to answer in a row
     Context context; //Need the context to build a quiz
-    View userView; //Takes in the userView which updates the stats of the user
-    WW1QuizOptionRV(FragmentManager fragmentManager,ArrayList<Pair<Integer,String>> quizzes, int questionNr, int currScore, int currStrike, View userView){
+    View progressBarView; //Takes in the userView which updates the stats of the user
+    int quizArray; //The id of the array of question we use
+    WW1QuizOptionRV(FragmentManager fragmentManager,ArrayList<Pair<Integer,String>> quizzes, int questionNr, int currScore, int currStrike, int quizArray, View userView){
         this.fragmentManager = fragmentManager;
         this.options = quizzes;
         qNr = questionNr;
         this.currScore = currScore;
         this.currStrike = currStrike;
-        this.userView = userView;
+        this.progressBarView = userView;
+        this.quizArray = quizArray;
 
     }
 
@@ -49,41 +53,23 @@ public class WW1QuizOptionRV extends RecyclerView.Adapter<WW1QuizOptionRV.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
+        //To do set this up as a async task, and just let main show a loading bar
         Button btn = viewHolder.optionBtn;
         btn.setText(options.get(i).second);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //If multiple choice do something else
+                v.setEnabled(false);
+                ProgressBar p = progressBarView.findViewById(R.id.progressBar_MC);
+                RecyclerView rv = progressBarView.findViewById(R.id.quiz_buttons_rv);
+                p.setVisibility(View.VISIBLE);
+                rv.setVisibility(View.INVISIBLE);
+                new LoadQuestion().execute(i);
 
-
-                //If the answer is correct give points else don't
-                if(options.get(i).first == 1){
-                    currScore += 100;
-                    MainActivity.GLOBAL_PROFILE.addCurrXP(Math.round(100.f * (currStrike/10.f)));
-                    currStrike +=1;
-                    WW1QuizFragment.UserSetup(userView);
-                }
-                else{
-                    currStrike = 0;
-                    //wrong answer
-                    //Give 0 points and no xp
-                }
-                Bundle b = new Bundle();
-                b.putSerializable("quiz", WW1Quiz.getBuildUpQuiz(context));
-                ArrayList<Integer> quizStuff = new ArrayList<>();
-                quizStuff.add(qNr + 1); //Quiz Nr
-                quizStuff.add(currScore); //Score
-                quizStuff.add(currStrike); //Strike
-                b.putSerializable("q_nr", quizStuff);
-                WW1QuizFragment ww1QuizFragment = new WW1QuizFragment();
-                ww1QuizFragment.setArguments(b);
-                fragmentManager.beginTransaction()
-                        .replace(R.id.wikifrag, ww1QuizFragment)
-                        .commit();
             }
         });
     }
+
 
     @Override
     public int getItemCount() {
@@ -97,4 +83,36 @@ public class WW1QuizOptionRV extends RecyclerView.Adapter<WW1QuizOptionRV.ViewHo
             optionBtn = itemView.findViewById(R.id.answer1);
         }
     }
+    private class LoadQuestion extends AsyncTask<Integer, Void, WW1QuizFragment> {
+        protected WW1QuizFragment doInBackground(Integer... ints) {
+            if (options.get(ints[0]).first == 1) {
+                currScore += 100;
+                MainActivity.GLOBAL_PROFILE.addCurrXP(100 + Math.round((100.f * (currStrike / 10.f))));
+                currStrike += 1;
+                // WW1QuizFragment.UserSetup(userView);
+            } else {
+                currStrike = 0;
+                //wrong answer
+                //Give 0 points and no xp
+            }
+
+            Bundle b = new Bundle();
+            ArrayList<Integer> quizStuff = new ArrayList<>();
+            quizStuff.add(qNr + 1); //Quiz Nr
+            quizStuff.add(currScore); //Score
+            quizStuff.add(currStrike); //Strike
+            quizStuff.add(quizArray);
+            b.putSerializable("q_nr", quizStuff);
+            WW1QuizFragment ww1QuizFragment = new WW1QuizFragment();
+            ww1QuizFragment.setArguments(b);
+            return  ww1QuizFragment;
+        }
+
+        protected void onPostExecute(WW1QuizFragment result) {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.wikifrag, result)
+                    .commit();
+        }
+    }
+
 }

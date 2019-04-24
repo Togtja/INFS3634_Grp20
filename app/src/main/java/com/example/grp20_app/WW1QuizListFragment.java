@@ -40,8 +40,13 @@ public class WW1QuizListFragment extends Fragment {
 
         //Sends in the list of available quizzes
         ArrayList<String> test_list = new ArrayList<>();
+        test_list.add("Quiz About The Causes and Buildup");
         test_list.add("Quiz About 1914");
         test_list.add("Quiz About 1915");
+        test_list.add("Quiz About 1916");
+        test_list.add("Quiz About 1917");
+        test_list.add("Quiz About 1918");
+        test_list.add("Quiz About The Aftermath");
         mAdapter = new WW1QuizRecyclerView(getFragmentManager(), test_list);
 
         quizRecycler.setAdapter(mAdapter);

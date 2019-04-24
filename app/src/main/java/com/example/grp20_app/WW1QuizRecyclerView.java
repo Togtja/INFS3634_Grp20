@@ -42,39 +42,13 @@ public class WW1QuizRecyclerView extends RecyclerView.Adapter<WW1QuizRecyclerVie
             @Override
             public void onClick(View v) {
                 //Send you to the correct quiz
-                //Also maybe something else than a switch?
-                switch (i){
-                    //Build up
-                    case 0:
-
-                        break;
-                    //1914
-                    case 1:
-                        break;
-                    //1915
-                    case 2:
-                        break;
-                    //1916
-                    case 3:
-                        break;
-                    //1917
-                    case 4:
-                        break;
-                    //1918
-                    case 5:
-                        break;
-                    //1916
-                    case 6:
-                        break;
-                    default:
-                        //We fucked up
-                        return;
-                }
                 Bundle b = new Bundle();
                 ArrayList<Integer> quizStuff = new ArrayList<>();
                 quizStuff.add(0); //Quiz Nr
                 quizStuff.add(0); //Score
                 quizStuff.add(0); //Strike
+                quizStuff.add(i); //ID for the quiz (0 is build up 1 is 1914 etc)
+
                 b.putSerializable("q_nr", quizStuff);
                 WW1QuizFragment ww1QuizFragment = new WW1QuizFragment();
                 ww1QuizFragment.setArguments(b);

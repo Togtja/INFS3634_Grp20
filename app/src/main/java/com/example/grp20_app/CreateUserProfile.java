@@ -89,9 +89,9 @@ public class CreateUserProfile extends AppCompatActivity {
         WW1UserProfile profile = new WW1UserProfile(text.getText().toString(), mypath.getAbsolutePath());
         profile.saveData(this); //We save the profile to internal storage
         //we start the main activity again, now with a profile on disk
-        //startActivity(new Intent(this, MainActivity.class));
-        this.finish();
 
+        startActivity(new Intent(this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+        finish();
     }
 
 }

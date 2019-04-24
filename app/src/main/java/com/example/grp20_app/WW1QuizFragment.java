@@ -40,15 +40,41 @@ public class WW1QuizFragment extends Fragment {
         UserSetup(userView);
 
 
-        ArrayList<WW1Quiz> quiz = WW1Quiz.getBuildUpQuiz(getContext());
+
 
         ArrayList<Integer> qStuff = (ArrayList<Integer>) bundle.getSerializable("q_nr");
         /*
                 quizStuff(0); //Quiz Nr
                 quizStuff(1); //Score
                 quizStuff(2); //Strike
+                quizStuff(3); //What Quiz to get
         */
-
+        ArrayList<WW1Quiz> quiz;
+        switch (qStuff.get(3)){
+            case 0:
+                quiz = WW1Quiz.getBuildUpQuiz(getContext());
+                break;
+            case 1:
+                quiz = WW1Quiz.get1914Quiz(getContext());
+                break;
+            case 2:
+                quiz = WW1Quiz.get1915Quiz(getContext());
+                break;
+            case 3:
+                quiz = WW1Quiz.get1916Quiz(getContext());
+                break;
+            case 4:
+                quiz = WW1Quiz.get1917Quiz(getContext());
+                break;
+            case 5:
+                quiz = WW1Quiz.get1918Quiz(getContext());
+                break;
+            case 6:
+                quiz = WW1Quiz.getAfterMathQuiz(getContext());
+                break;
+            default:
+                return null;
+        }
         TextView questions =  view.findViewById(R.id.quiz_question);
         if(qStuff.get(0) >= quiz.size()){
             //You finished the quiz, so we save your progress
@@ -61,13 +87,11 @@ public class WW1QuizFragment extends Fragment {
         }
         ImageView imageView = view.findViewById(R.id.imageView);
         //There a bug here that makes it display a null photo (or rather a null photo isn't null)
+        imageView.setVisibility(View.GONE);
         if(quiz.get(qStuff.get(0)) != null){
             Log.d("PHOTO", "Is not gone");
             imageView.setImageBitmap(quiz.get(qStuff.get(0)).getImage());
-        }
-        else{
-            Log.d("PHOTO", "Is it GONE");
-            imageView.setVisibility(View.GONE);
+            imageView.setVisibility(View.VISIBLE);
         }
         questions.setText(quiz.get(qStuff.get(0)).getQuestion());
         score = view.findViewById(R.id.text_score);
@@ -79,7 +103,7 @@ public class WW1QuizFragment extends Fragment {
 
         options.setLayoutManager(new GridLayoutManager(getContext(), 1));
 
-        mAdapter = new WW1QuizOptionRV(getFragmentManager(),quiz.get(qStuff.get(0)).getAnswer(), qStuff.get(0), qStuff.get(1), qStuff.get(2), userView);
+        mAdapter = new WW1QuizOptionRV(getFragmentManager(),quiz.get(qStuff.get(0)).getAnswer(), qStuff.get(0), qStuff.get(1), qStuff.get(2), qStuff.get(3), view);
         options.setAdapter(mAdapter);
         return view;
     }

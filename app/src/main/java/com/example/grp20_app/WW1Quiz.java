@@ -160,12 +160,148 @@ public class WW1Quiz {
         return null;
     }
     //For the 1918 Quiz
-    static ArrayList<WW1Quiz> get1918Quiz(Context context){
-        return null;
+    public static ArrayList<WW1Quiz> get1918Quiz(Context context){
+        ArrayList<WW1Quiz> ret = new ArrayList<>();
+        //Question 1
+        //options for questions
+        ArrayList<Pair<Integer, String>> options = new ArrayList<>();
+        options.add(new Pair<>(0 , "14 principles to cripple the Central Powers to never be able to make war again"));
+        options.add(new Pair<>(0 , "14 principles to help the European powers after The War"));
+        options.add(new Pair<>(1 , "14 statement of principles for peace to be used under peace negotiations"));
+        options.add(new Pair<>(0 , "14 statement for deploying US soldiers in Europe"));
+
+
+        //Optional photo
+        Bitmap icon = BitmapFactory.decodeResource(context.getResources(),
+                R.drawable.points14);
+        //Actually adding the question
+        ret.add(new WW1Quiz(0, "What President Woodrow Wilson's Fourteen points about?", options, icon));
+
+        //Question 2
+        //options for questions
+        options = new ArrayList<>();
+        options.add(new Pair<>(0 , "The Peace Treaty Between The Central Powers and Russia"));
+        options.add(new Pair<>(1 , "The Peace Treaty Between The Central Powers and Ukraine"));
+        options.add(new Pair<>(0 , "The Peace Treaty Between The Central Powers and Belarus"));
+        options.add(new Pair<>(0 , "The Peace Treaty Between The Central Powers and Poland"));
+
+
+        //Optional photo
+        icon = BitmapFactory.decodeResource(context.getResources(),
+                R.drawable.brestlit);
+        //Actually adding the question
+        ret.add(new WW1Quiz(0, "What was the Treaty of Brest-Litovsk (9 February 1918)?", options, icon));
+
+        //Question 3
+        //options for questions
+        options = new ArrayList<>();
+        options.add(new Pair<>(1 , "The Peace Treaty Between The Central Powers and Russia"));
+        options.add(new Pair<>(0 , "The Peace Treaty Between The Central Powers and Ukraine"));
+        options.add(new Pair<>(0 , "The Peace Treaty Between The Central Powers and Belarus"));
+        options.add(new Pair<>(0 , "The Peace Treaty Between The Central Powers and Poland"));
+
+
+        //Optional photo
+        icon = BitmapFactory.decodeResource(context.getResources(),
+                R.drawable.brestlitrus);
+        //Actually adding the question
+        ret.add(new WW1Quiz(0, "What was the Treaty of Brest-Litovsk (3 March 1918)?", options, icon));
+
+        //Question 4
+        //options for questions
+        options = new ArrayList<>();
+        options.add(new Pair<>(0 , "An Offence made by the Allied Forces to capitulate The German Empire"));
+        options.add(new Pair<>(0 , "An Offence made by the Unites States when they entered Europe"));
+        options.add(new Pair<>(0 , "An Offence made by the German Empire to defeat The Russian Empire"));
+        options.add(new Pair<>(1 , "An Offence made by the German Empire to get a favourable Armistice with the Allies"));
+
+        //Actually adding the question
+        ret.add(new WW1Quiz(0, "Who had the Spring Offensive and what was it's goal?", options));
+
+
+        //Question 5
+        //options for questions
+        options = new ArrayList<>();
+        options.add(new Pair<>(1 , "A rapid series of Allied victory, that ended with the capitulation of The German Empire"));
+        options.add(new Pair<>(0 , "The last German attempt to defeat the Allies, that eventually failed"));
+        options.add(new Pair<>(0 , "An Anzac offence to rapidly defeat the Ottomans"));
+        options.add(new Pair<>(0 , "The series of attack Unites States had when entering Europe "));
+
+        //Actually adding the question
+        ret.add(new WW1Quiz(0, "What was the Hundred Days Offensive?", options));
+
+
+
+
+        return ret;
     }
     //For the Aftermath Quiz
     public static ArrayList<WW1Quiz> getAfterMathQuiz(Context context){
-        return null;
+        ArrayList<WW1Quiz> ret = new ArrayList<>();
+        //Question 1
+        //options for questions
+        ArrayList<Pair<Integer, String>> options = new ArrayList<>();
+        options.add(new Pair<>(0 , "Kingdom of Bosnians, Serbs and Croats"));
+        options.add(new Pair<>(0 , "Kingdom of Bosnians, Croats and Slovenes"));
+        options.add(new Pair<>(1 , "Kingdom of Serbs, Croats and Slovenes"));
+        options.add(new Pair<>(0 , "Kingdom of Bosnians, Serbs and Slovenes"));
+
+        //Optional photo
+        Bitmap icon = BitmapFactory.decodeResource(context.getResources(),
+                R.drawable.yugoslav);
+        //Actually adding the question
+        ret.add(new WW1Quiz(0, "This Nation would later become Yugoslavia, but what was it called right after the war (Until 1929)?", options, icon));
+        //Question 2
+        //options for questions
+        options = new ArrayList<>();
+        options.add(new Pair<>(0 , "28 June 1919"));
+        options.add(new Pair<>(1 , "18 January 1919"));
+        options.add(new Pair<>(0 , "15 March 1919"));
+        options.add(new Pair<>(0 , "11 November 1918"));
+
+        icon = BitmapFactory.decodeResource(context.getResources(),
+                R.drawable.signingof_ppc);
+
+        //Actually adding the question
+        ret.add(new WW1Quiz(0, "When did the Paris Peace Conference begin? ", options, icon));
+
+
+        //Question 3
+        //options for questions
+        options = new ArrayList<>();
+        options.add(new Pair<>(0 , "27 Countries and Nationalities"));
+        options.add(new Pair<>(0 , "22 Countries and Nationalities"));
+        options.add(new Pair<>(0 , "36 Countries and Nationalities"));
+        options.add(new Pair<>(1 , "32 Countries and Nationalities"));
+
+        //Actually adding the question
+        ret.add(new WW1Quiz(0, "How many Counties and Nationalities did the Paris Peace Conference involve?", options));
+
+        //Question 4
+        //options for questions
+        options = new ArrayList<>();
+        options.add(new Pair<>(0 , "Paris Peace Treaties"));
+        options.add(new Pair<>(0 , "Nuremberg Trials"));
+        options.add(new Pair<>(1 , "Treaty of Versailles"));
+        options.add(new Pair<>(0 , "Disbandment of the League of Nations"));
+
+        //Actually adding the question
+        ret.add(new WW1Quiz(0, "What was the main takeaway  from the Paris Peace Conference?", options));
+
+        //Question 5
+        //options for questions
+        options = new ArrayList<>();
+        options.add(new Pair<>(1 , "28 June 1919"));
+        options.add(new Pair<>(0 , "18 January 1919"));
+        options.add(new Pair<>(0 , "15 March 1919"));
+        options.add(new Pair<>(0 , "11 November 1918"));
+
+        //Actually adding the question
+        ret.add(new WW1Quiz(0, "When was the Treaty of Versailles singed", options));
+
+
+
+        return ret;
     }
 
 }

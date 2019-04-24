@@ -1,6 +1,7 @@
 package com.example.grp20_app;
 
 import android.content.Intent;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -34,6 +35,12 @@ public class MainActivity extends AppCompatActivity {
         //First checks if we have a profile on disk
         GLOBAL_PROFILE = WW1UserProfile.getData(getApplicationContext());
         if(GLOBAL_PROFILE == null){
+            //Removes the fragmnet from the stack
+            //(Only used if you came from deleted profile and try to go back)
+            FragmentManager fm = getSupportFragmentManager();
+            for(int i = 0; i < fm.getBackStackEntryCount(); ++i) {
+                fm.popBackStack();
+            }
             //If we couldn't find one, create one
             startActivity(new Intent(this, CreateUserProfile.class));
         }
