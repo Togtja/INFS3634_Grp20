@@ -568,6 +568,10 @@
         "source": "/home/tomas/.gradle/caches/transforms-2/files-2.1/ab9a6b34f99afb7063bca5b3105cd817/res/drawable-xxhdpi-v4/abc_list_pressed_holo_light.9.png"
     },
     {
+        "merged": "/home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/build/intermediates/res/merged/debug/drawable_hartmannswillerkopf.jpg.flat",
+        "source": "/home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/src/main/res/drawable/hartmannswillerkopf.jpg"
+    },
+    {
         "merged": "/home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/build/intermediates/res/merged/debug/interpolator-v21_mtrl_fast_out_slow_in.xml.flat",
         "source": "/home/tomas/.gradle/caches/transforms-2/files-2.1/8fd5fe496f3e385458b1b032ed22e57c/res/interpolator-v21/mtrl_fast_out_slow_in.xml"
     },
@@ -844,6 +848,10 @@
         "source": "/home/tomas/.gradle/caches/transforms-2/files-2.1/ab9a6b34f99afb7063bca5b3105cd817/res/drawable-mdpi-v4/abc_list_pressed_holo_light.9.png"
     },
     {
+        "merged": "/home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/build/intermediates/res/merged/debug/drawable_saaad.jpg.flat",
+        "source": "/home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/src/main/res/drawable/saaad.jpg"
+    },
+    {
         "merged": "/home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_abc_ic_star_black_16dp.png.flat",
         "source": "/home/tomas/.gradle/caches/transforms-2/files-2.1/ab9a6b34f99afb7063bca5b3105cd817/res/drawable-xxxhdpi-v4/abc_ic_star_black_16dp.png"
     },
@@ -1116,6 +1124,10 @@
         "source": "/home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/src/main/res/layout/ww1_quizlist.xml"
     },
     {
+        "merged": "/home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/build/intermediates/res/merged/debug/drawable_joncherey.jpg.flat",
+        "source": "/home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/src/main/res/drawable/joncherey.jpg"
+    },
+    {
         "merged": "/home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_ic_menu_share_mtrl_alpha.png.flat",
         "source": "/home/tomas/.gradle/caches/transforms-2/files-2.1/ab9a6b34f99afb7063bca5b3105cd817/res/drawable-hdpi-v4/abc_ic_menu_share_mtrl_alpha.png"
     },
@@ -1288,6 +1300,10 @@
         "source": "/home/tomas/.gradle/caches/transforms-2/files-2.1/ab9a6b34f99afb7063bca5b3105cd817/res/color/abc_btn_colored_borderless_text_material.xml"
     },
     {
+        "merged": "/home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/build/intermediates/res/merged/debug/drawable_erzeroum.jpeg.flat",
+        "source": "/home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/src/main/res/drawable/erzeroum.jpeg"
+    },
+    {
         "merged": "/home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/build/intermediates/res/merged/debug/drawable-watch-v20_abc_dialog_material_background.xml.flat",
         "source": "/home/tomas/.gradle/caches/transforms-2/files-2.1/ab9a6b34f99afb7063bca5b3105cd817/res/drawable-watch-v20/abc_dialog_material_background.xml"
     },
@@ -1334,6 +1350,10 @@
     {
         "merged": "/home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/build/intermediates/res/merged/debug/drawable-v21_avd_show_password.xml.flat",
         "source": "/home/tomas/.gradle/caches/transforms-2/files-2.1/8fd5fe496f3e385458b1b032ed22e57c/res/drawable-v21/avd_show_password.xml"
+    },
+    {
+        "merged": "/home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/build/intermediates/res/merged/debug/drawable_halen.jpg.flat",
+        "source": "/home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/src/main/res/drawable/halen.jpg"
     },
     {
         "merged": "/home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_list_divider_mtrl_alpha.9.png.flat",
@@ -1466,6 +1486,10 @@
     {
         "merged": "/home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_notification_bg_low_normal.9.png.flat",
         "source": "/home/tomas/.gradle/caches/transforms-2/files-2.1/2a20fabe5320c0a94d59148b644c6825/res/drawable-mdpi-v4/notification_bg_low_normal.9.png"
+    },
+    {
+        "merged": "/home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/build/intermediates/res/merged/debug/drawable_jassin.jpg.flat",
+        "source": "/home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/src/main/res/drawable/jassin.jpg"
     },
     {
         "merged": "/home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_design_ic_visibility_off.png.flat",
@@ -1710,6 +1734,10 @@
     {
         "merged": "/home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_ic_star_black_16dp.png.flat",
         "source": "/home/tomas/.gradle/caches/transforms-2/files-2.1/ab9a6b34f99afb7063bca5b3105cd817/res/drawable-xhdpi-v4/abc_ic_star_black_16dp.png"
+    },
+    {
+        "merged": "/home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/build/intermediates/res/merged/debug/drawable_jansmuts.jpg.flat",
+        "source": "/home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/src/main/res/drawable/jansmuts.jpg"
     },
     {
         "merged": "/home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/build/intermediates/res/merged/debug/drawable_abc_ic_menu_overflow_material.xml.flat",

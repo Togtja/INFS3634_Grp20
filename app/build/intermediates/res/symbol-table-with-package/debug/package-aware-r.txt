@@ -1005,12 +1005,18 @@ drawable design_ic_visibility
 drawable design_ic_visibility_off
 drawable design_password_eye
 drawable design_snackbar_background
+drawable erzeroum
 drawable francisferd
+drawable halen
+drawable hartmannswillerkopf
 drawable ic_launcher_background
 drawable ic_launcher_foreground
 drawable ic_mtrl_chip_checked_black
 drawable ic_mtrl_chip_checked_circle
 drawable ic_mtrl_chip_close_circle
+drawable jansmuts
+drawable jassin
+drawable joncherey
 drawable mtrl_snackbar_background
 drawable mtrl_tabs_default_indicator
 drawable navigation_empty_icon
@@ -1030,6 +1036,7 @@ drawable peaceww1
 drawable person
 drawable points14
 drawable quizicon
+drawable saaad
 drawable signingof_ppc
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
