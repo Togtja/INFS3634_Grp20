@@ -3,7 +3,6 @@ package com.example.grp20_app;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -72,10 +71,8 @@ public class WW1QuizRecyclerView extends RecyclerView.Adapter<WW1QuizRecyclerVie
                         return;
                 }
                 Bundle b = new Bundle();
-                b.putSerializable("quiz", WW1Quiz.getBuildUpQuiz(context));
                 ArrayList<Integer> quizStuff = new ArrayList<>();
                 quizStuff.add(0); //Quiz Nr
-                quizStuff.add(MainActivity.GLOBAL_PROFILE.getCurrXP()); //CurrXp
                 quizStuff.add(0); //Score
                 quizStuff.add(0); //Strike
                 b.putSerializable("q_nr", quizStuff);

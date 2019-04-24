@@ -38,6 +38,7 @@ public class CreateUserProfile extends AppCompatActivity {
         text = findViewById(R.id.profileName);
         theImage = null;
 
+
     }
     //We have a result from the gallery request
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -88,7 +89,9 @@ public class CreateUserProfile extends AppCompatActivity {
         WW1UserProfile profile = new WW1UserProfile(text.getText().toString(), mypath.getAbsolutePath());
         profile.saveData(this); //We save the profile to internal storage
         //we start the main activity again, now with a profile on disk
-        startActivity(new Intent(this, MainActivity.class));
+        //startActivity(new Intent(this, MainActivity.class));
+        this.finish();
+
     }
 
 }

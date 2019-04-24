@@ -79,6 +79,25 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+    @Override
+    public void onBackPressed() {
+        if (getFragmentManager().getBackStackEntryCount() < 0) {
+            this.finish();
+        }
+        else {
+            super.onBackPressed();
+        }
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        //save user data to file
+        if(MainActivity.GLOBAL_PROFILE != null){
+            MainActivity.GLOBAL_PROFILE.saveData(getApplicationContext());
+        }
+
+    }
+
     //If you click on your profile photo it opens some information about your profile
     public void OpenProfile(View view){
         startActivity(new Intent(this, WW1DisplayProfile.class));

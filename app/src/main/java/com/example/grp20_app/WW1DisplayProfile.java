@@ -37,6 +37,7 @@ public class WW1DisplayProfile extends AppCompatActivity {
         boolean deleted = file.delete();
         if(deleted){
             startActivity(new Intent(this, MainActivity.class));
+            finish();
         }
         //The Gallery photo will not be deleted until you either uninstall or overwrite it with a new photo
 

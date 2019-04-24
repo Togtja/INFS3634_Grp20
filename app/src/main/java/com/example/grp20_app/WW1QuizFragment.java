@@ -39,13 +39,14 @@ public class WW1QuizFragment extends Fragment {
         View userView = LayoutInflater.from(getContext()).inflate(R.layout.ww1_user_stuff, frame, true);
         UserSetup(userView);
 
-        ArrayList<WW1Quiz> quiz = (ArrayList<WW1Quiz>) bundle.getSerializable("quiz");
+
+        ArrayList<WW1Quiz> quiz = WW1Quiz.getBuildUpQuiz(getContext());
+
         ArrayList<Integer> qStuff = (ArrayList<Integer>) bundle.getSerializable("q_nr");
         /*
                 quizStuff(0); //Quiz Nr
-                quizStuff(1); //CurrXp
-                quizStuff(2); //Score
-                quizStuff(3); //Strike
+                quizStuff(1); //Score
+                quizStuff(2); //Strike
         */
 
         TextView questions =  view.findViewById(R.id.quiz_question);
@@ -56,6 +57,7 @@ public class WW1QuizFragment extends Fragment {
             getFragmentManager().beginTransaction()
                     .replace(R.id.wikifrag, ww1QuizListFragment)
                     .commit();
+            return null;
         }
         ImageView imageView = view.findViewById(R.id.imageView);
         //There a bug here that makes it display a null photo (or rather a null photo isn't null)
@@ -64,12 +66,12 @@ public class WW1QuizFragment extends Fragment {
             imageView.setImageBitmap(quiz.get(qStuff.get(0)).getImage());
         }
         else{
-            Log.d("PHOTO", "Is it gone");
+            Log.d("PHOTO", "Is it GONE");
             imageView.setVisibility(View.GONE);
         }
         questions.setText(quiz.get(qStuff.get(0)).getQuestion());
         score = view.findViewById(R.id.text_score);
-        score.setText("Score: " + qStuff.get(2));
+        score.setText("Score: " + qStuff.get(1));
         TextView q_num = view.findViewById(R.id.question_number);
         q_num.setText(Integer.toString(qStuff.get(0)+ 1));
         options = view.findViewById(R.id.quiz_buttons_rv);
@@ -77,7 +79,7 @@ public class WW1QuizFragment extends Fragment {
 
         options.setLayoutManager(new GridLayoutManager(getContext(), 1));
 
-        mAdapter = new WW1QuizOptionRV(getFragmentManager(),quiz.get(qStuff.get(0)).getAnswer(), qStuff.get(0), qStuff.get(2), qStuff.get(3), userView);
+        mAdapter = new WW1QuizOptionRV(getFragmentManager(),quiz.get(qStuff.get(0)).getAnswer(), qStuff.get(0), qStuff.get(1), qStuff.get(2), userView);
         options.setAdapter(mAdapter);
         return view;
     }

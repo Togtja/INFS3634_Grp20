@@ -73,7 +73,6 @@ public class WW1QuizOptionRV extends RecyclerView.Adapter<WW1QuizOptionRV.ViewHo
                 b.putSerializable("quiz", WW1Quiz.getBuildUpQuiz(context));
                 ArrayList<Integer> quizStuff = new ArrayList<>();
                 quizStuff.add(qNr + 1); //Quiz Nr
-                quizStuff.add(MainActivity.GLOBAL_PROFILE.getCurrXP()); //CurrXp
                 quizStuff.add(currScore); //Score
                 quizStuff.add(currStrike); //Strike
                 b.putSerializable("q_nr", quizStuff);
@@ -84,11 +83,6 @@ public class WW1QuizOptionRV extends RecyclerView.Adapter<WW1QuizOptionRV.ViewHo
                         .commit();
             }
         });
-
-        /*
-        * If onclick option has option.get(i).first > 0, then points!!
-        *
-        * */
     }
 
     @Override
