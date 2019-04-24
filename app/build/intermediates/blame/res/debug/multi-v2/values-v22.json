@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v22/values-v22.xml",
+            "outputFile": "/Users/glendio/AndroidStudioProjects/INFS3634_Grp20/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v22/values-v22.xml",
             "map": [
                 {
-                    "source": "/home/tomas/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/f5cc5659ecc6bf8880bc876ab516bb59/res/values-v22/values-v22.xml",
+                    "source": "/Users/glendio/.gradle/caches/transforms-2/files-2.1/73bd015a77fc4bdc73a46d452e3209f5/res/values-v22/values-v22.xml",
                     "from": {
                         "startLines": "2,3,4,9",
                         "startColumns": "4,4,4,4",
