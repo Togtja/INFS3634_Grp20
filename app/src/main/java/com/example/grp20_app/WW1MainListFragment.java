@@ -12,8 +12,14 @@ import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
+/*
+* Here we manually select what webpages should be apart of the app
+* We wanted to automate this, but the wiki API isn't powerful enough for tha yet
+* so we can't just select a ww1 category and run with it
+* It will then send the wikipedia pages to the recycler view who will call the API and display them
+* (We might want to move the Array list to Wikipage.class)
+* */
 
 import java.util.ArrayList;
 
@@ -70,7 +76,7 @@ public class WW1MainListFragment extends Fragment {
         ArrayList<String> ww1_afterMatch = new ArrayList<>();
         ww1_afterMatch.add("1920_Schleswig_plebiscites");
 
-        //Add to list
+        //Make an Array out of the arrays
         wikiPages.add(ww1_buildUp);
         wikiPages.add(ww1_1914);
         wikiPages.add(ww1_1915);
@@ -86,6 +92,8 @@ public class WW1MainListFragment extends Fragment {
         for(int x = 0; x < s.size(); x++){
             list.add(new Pair<>(s.get(x), i.get(x)));
         }
+        //Send the list of Titles and Images we got from a bulde from MainActivity
+        //And the wikiPages Array we made to the WW1MainListRecyclerView
         FragmentManager fragmentManager = getFragmentManager();
         mAdapter = new WW1MainListRecyclerView(fragmentManager, list, wikiPages);
 

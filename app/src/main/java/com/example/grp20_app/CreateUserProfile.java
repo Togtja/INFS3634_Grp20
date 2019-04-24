@@ -18,9 +18,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
-
+/*
+If the user have no profile (say first time starting the app)
+He will be prompted to make one. hence this code
+It Displayed the user_makeprofile layout
+and ask the user for a name an optional photo
+ */
 public class CreateUserProfile extends AppCompatActivity {
+    //Nr of photos needed from the gallery
     public static final int GET_FROM_GALLERY = 1;
     ImageButton imageButton;
     EditText text;
@@ -34,14 +39,15 @@ public class CreateUserProfile extends AppCompatActivity {
         theImage = null;
 
     }
-
+    //We have a result from the gallery request
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         //Detects request codes
         if(requestCode==GET_FROM_GALLERY && resultCode == Activity.RESULT_OK) {
-            Uri imageUri = data.getData();
+            Uri imageUri = data.getData(); //Get the Uri from the gallery
             Bitmap bitmap;
             try {
+                //Both get the bit map and set that as the image button photo
                 bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
                 imageButton.setImageBitmap(bitmap);
                 theImage = bitmap;
@@ -54,7 +60,7 @@ public class CreateUserProfile extends AppCompatActivity {
             }
         }
     }
-
+    //the user clicked on the image and is now prompted to select a photo from his gallery
     public void getImage(View view){
         startActivityForResult(new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
     }
@@ -62,10 +68,8 @@ public class CreateUserProfile extends AppCompatActivity {
 
         //Save the photo you selected from gallery to our internal storage
         ContextWrapper cw = new ContextWrapper(getApplicationContext());
-        // path to /data/data/yourapp/app_data/imageDir
-        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
         // Create imageDir
-        File mypath = new File(directory,"profile.jpg");
+        File mypath = new File(cw.getDir("imageDir", Context.MODE_PRIVATE),"profile.jpg");
         FileOutputStream fos = null;
         try {
             fos = new FileOutputStream(mypath);
@@ -80,10 +84,10 @@ public class CreateUserProfile extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-
+        //Give the User_profile the path to the photo so we can call it in the future
         WW1UserProfile profile = new WW1UserProfile(text.getText().toString(), mypath.getAbsolutePath());
-        profile.saveData(this);
-
+        profile.saveData(this); //We save the profile to internal storage
+        //we start the main activity again, now with a profile on disk
         startActivity(new Intent(this, MainActivity.class));
     }
 

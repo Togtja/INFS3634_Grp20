@@ -4,32 +4,37 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
 import java.util.ArrayList;
+
+/*
+* Displays the different quiz options
+* Then check what the user selected
+* Give points and updates the UI
+* Then call the next question
+* */
 
 public class WW1QuizOptionRV extends RecyclerView.Adapter<WW1QuizOptionRV.ViewHolder> {
     FragmentManager fragmentManager;
     private ArrayList<Pair<Integer, String>> options;
-    int qNr;
-    int currXp;
-    int currScore;
-    int currStrike;
-    Context context;
-    WW1QuizOptionRV(FragmentManager fragmentManager,ArrayList<Pair<Integer,String>> quizzes, int questionNr, int currXp, int currScore, int currStrike){
+    int qNr; //The Quiz Nr
+    int currScore;//The current score for that quiz the user is taking
+    int currStrike;//How many the user have managed to answer in a row
+    Context context; //Need the context to build a quiz
+    View userView; //Takes in the userView which updates the stats of the user
+    WW1QuizOptionRV(FragmentManager fragmentManager,ArrayList<Pair<Integer,String>> quizzes, int questionNr, int currScore, int currStrike, View userView){
         this.fragmentManager = fragmentManager;
         this.options = quizzes;
         qNr = questionNr;
-        this.currXp = currXp;
         this.currScore = currScore;
         this.currStrike = currStrike;
+        this.userView = userView;
 
     }
 
@@ -49,10 +54,15 @@ public class WW1QuizOptionRV extends RecyclerView.Adapter<WW1QuizOptionRV.ViewHo
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //If multiple choice do something else
+
+
+                //If the answer is correct give points else don't
                 if(options.get(i).first == 1){
                     currScore += 100;
-                    currXp += (int) (100.f * (1.f + ((float)currStrike/10.f)));
+                    MainActivity.GLOBAL_PROFILE.addCurrXP(Math.round(100.f * (currStrike/10.f)));
                     currStrike +=1;
+                    WW1QuizFragment.UserSetup(userView);
                 }
                 else{
                     currStrike = 0;
@@ -63,14 +73,14 @@ public class WW1QuizOptionRV extends RecyclerView.Adapter<WW1QuizOptionRV.ViewHo
                 b.putSerializable("quiz", WW1Quiz.getBuildUpQuiz(context));
                 ArrayList<Integer> quizStuff = new ArrayList<>();
                 quizStuff.add(qNr + 1); //Quiz Nr
-                quizStuff.add(currXp); //CurrXp
-                quizStuff.add(currXp); //Score
-                quizStuff.add(0); //Strike
+                quizStuff.add(MainActivity.GLOBAL_PROFILE.getCurrXP()); //CurrXp
+                quizStuff.add(currScore); //Score
+                quizStuff.add(currStrike); //Strike
                 b.putSerializable("q_nr", quizStuff);
                 WW1QuizFragment ww1QuizFragment = new WW1QuizFragment();
                 ww1QuizFragment.setArguments(b);
                 fragmentManager.beginTransaction()
-                        .replace(R.id.wikifrag, ww1QuizFragment).addToBackStack(null)
+                        .replace(R.id.wikifrag, ww1QuizFragment)
                         .commit();
             }
         });

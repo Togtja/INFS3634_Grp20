@@ -6,14 +6,20 @@ import android.graphics.BitmapFactory;
 import android.util.Pair;
 
 import java.util.ArrayList;
-
+/*
+* Stores the info you need to make and retrieve quizzes
+*
+*
+* */
 public class WW1Quiz {
-    private int id;
-    private String question;
-    private Bitmap image;
-    private ArrayList<Pair<Integer, String>> answers;
-    private int correctAns;
+    private int id; //Quiz id, At the moment it's not being used for anything
+    private String question; //The Actual Question
+    private Bitmap image;   //An Image if that is needed
+    //// (Currently it needs to be a drawable, bit if we want to get it from a URL, all the code already exist for that)
+    private ArrayList<Pair<Integer, String>> options; //the different options
+    private int correctAns; //The Amount of correct answers i.e select the correct answers
 
+    //Constructor for multiple correct answers and an image/bitmap
     public WW1Quiz(int id, String question, ArrayList<Pair<Integer, String>> answers, int correctAns,  Bitmap image) {
         if(correctAns <= 0){
             throw new IllegalArgumentException("Amount of correct answers can't be 0 or less");
@@ -21,9 +27,10 @@ public class WW1Quiz {
         this.id = id;
         this.question = question;
         this.image = image;
-        this.answers = answers;
+        this.options = answers;
         this.correctAns = correctAns;
     }
+    //Constructor for multiple correct answers without image/bitmap
     public WW1Quiz(int id, String question, ArrayList<Pair<Integer, String>> answers, int correctAns) {
         if(correctAns <= 0){
             throw new IllegalArgumentException("Amount of correct answers can't be 0 or less");
@@ -31,23 +38,25 @@ public class WW1Quiz {
         this.id = id;
         this.question = question;
         this.image = null;
-        this.answers = answers;
+        this.options = answers;
         this.correctAns = correctAns;
     }
+    //Constructor for 1 correct answers and an image/bitmap
     public WW1Quiz(int id, String question, ArrayList<Pair<Integer, String>> answers, Bitmap image) {
 
         this.id = id;
         this.question = question;
         this.image = image;
-        this.answers = answers;
+        this.options = answers;
         this.correctAns = 1;
     }
+    //Constructor for 1 correct answers without image/bitmap
     public WW1Quiz(int id, String question, ArrayList<Pair<Integer, String>> answers) {
 
         this.id = id;
         this.question = question;
         this.image = null;
-        this.answers = answers;
+        this.options = answers;
         this.correctAns = 1;
     }
 
@@ -60,11 +69,11 @@ public class WW1Quiz {
     }
 
     public ArrayList<Pair<Integer, String>> getAnswer() {
-        return answers;
+        return options;
     }
 
     public void setAnswer(ArrayList<Pair<Integer, String>> answers) {
-        this.answers = answers;
+        this.options = answers;
     }
 
     public Bitmap getImage() {
@@ -90,8 +99,12 @@ public class WW1Quiz {
     public void setId(int id) {
         this.id = id;
     }
-
-    static ArrayList<WW1Quiz> getBuildUpQuiz(Context context){
+    /*
+    * Here we create the different questions/quizzes for the different categories
+    * It takes in a Context as uses that to find the drawable
+    */
+    //For the BuildUp Quiz
+    public static ArrayList<WW1Quiz> getBuildUpQuiz(Context context){
         ArrayList<WW1Quiz> ret = new ArrayList<>();
         //Question 1
             //options for questions
@@ -101,7 +114,7 @@ public class WW1Quiz {
         options.add(new Pair<>(1 , "But it's me Dio"));
         options.add(new Pair<>(0 , "Yahh no, not me"));
 
-        //Optonal photo
+        //Optional photo
         Bitmap icon = BitmapFactory.decodeResource(context.getResources(),
                 R.drawable.archyduke);
         //Actually adding the question
@@ -118,8 +131,7 @@ public class WW1Quiz {
         ret.add(new WW1Quiz(0, "Hey It's a Test Question", options));
 
         //Question 3
-        //multiple correct annswers
-
+        //multiple correct answers
         options = new ArrayList<>();
         options.add(new Pair<>(0 , "Not me"));
         options.add(new Pair<>(1 , "HEYAAHHHH"));
@@ -131,22 +143,28 @@ public class WW1Quiz {
         return ret;
 
     }
-    static ArrayList<WW1Quiz> get1914Quiz(){
+    //For the 1914 Quiz
+    public static ArrayList<WW1Quiz> get1914Quiz(Context context){
         return null;
     }
-    static ArrayList<WW1Quiz> get1915Quiz(){
+    //For the 1915 Quiz
+    public static ArrayList<WW1Quiz> get1915Quiz(Context context){
         return null;
     }
-    static ArrayList<WW1Quiz> get1916Quiz(){
+    //For the 1916 Quiz
+    public static ArrayList<WW1Quiz> get1916Quiz(Context context){
         return null;
     }
-    static ArrayList<WW1Quiz> get1917Quiz(){
+    //For the 1917 Quiz
+    public static ArrayList<WW1Quiz> get1917Quiz(Context context){
         return null;
     }
-    static ArrayList<WW1Quiz> get1918Quiz(){
+    //For the 1918 Quiz
+    static ArrayList<WW1Quiz> get1918Quiz(Context context){
         return null;
     }
-    static ArrayList<WW1Quiz> getAfterMatchQuiz(){
+    //For the Aftermath Quiz
+    public static ArrayList<WW1Quiz> getAfterMathQuiz(Context context){
         return null;
     }
 
