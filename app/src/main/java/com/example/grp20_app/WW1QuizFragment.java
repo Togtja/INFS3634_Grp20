@@ -35,9 +35,7 @@ public class WW1QuizFragment extends Fragment {
         Bundle bundle = getArguments();
         //if something when wrong with the bundle restart the app
         if (bundle == null) {startActivity(new Intent(getContext(), MainActivity.class));}
-        FrameLayout frame = view.findViewById(R.id.scoreboard);
-        View userView = LayoutInflater.from(getContext()).inflate(R.layout.ww1_user_stuff, frame, true);
-        UserSetup(userView);
+        //UserSetup(userView);
 
 
 
@@ -73,23 +71,29 @@ public class WW1QuizFragment extends Fragment {
                 quiz = WW1Quiz.getAfterMathQuiz(getContext());
                 break;
             default:
+                Log.d("Size", "onCreateView: WE FUECK UP");
                 return null;
         }
+        Log.d("Quiz", "index " + qStuff.get(0) + " size of quiz: " + quiz.size());
         TextView questions =  view.findViewById(R.id.quiz_question);
         if(qStuff.get(0) >= quiz.size()){
             //You finished the quiz, so we save your progress
             MainActivity.GLOBAL_PROFILE.saveData(getContext());
-            WW1QuizListFragment ww1QuizListFragment = new WW1QuizListFragment();
+            Log.d("Quiz", "onCreateView: Go to Quiz activity");
+            WW1QuizListFragment quizListFragment = new WW1QuizListFragment();
             getFragmentManager().beginTransaction()
-                    .replace(R.id.wikifrag, ww1QuizListFragment)
+                    .replace(R.id.wikifrag, quizListFragment)
                     .commit();
-            return null;
+            //I'll be honest I don't know why I need to return since I though I am replacing the view but whatever
+            //this does give a "E/RecyclerView: No adapter attached; skipping layout" Error, but no time to fix
+            return view;
+
         }
         ImageView imageView = view.findViewById(R.id.imageView);
         //There a bug here that makes it display a null photo (or rather a null photo isn't null)
         imageView.setVisibility(View.GONE);
-        if(quiz.get(qStuff.get(0)) != null){
-            Log.d("PHOTO", "Is not gone");
+
+        if(quiz.get(qStuff.get(0)).getImage() != null){
             imageView.setImageBitmap(quiz.get(qStuff.get(0)).getImage());
             imageView.setVisibility(View.VISIBLE);
         }
@@ -108,39 +112,5 @@ public class WW1QuizFragment extends Fragment {
         return view;
     }
 
-    //This changes/updates the profile UI that lives in the quiz fragments
-    //Remember to call this after any profile changes has been made
-    //Do not call it with a view that don't hold the ww1_user_stuff.xml
-    public static void UserSetup(View userView){
-        WW1UserProfile profile = MainActivity.GLOBAL_PROFILE;
 
-        Log.d("Profile xp", String.valueOf(profile.getCurrXP()));
-        //Username
-        TextView name = userView.findViewById(R.id.userName);
-        if(name == null){
-            //We are calling this in the wrong layout
-            //Bad Coding!!
-            Log.d("BAD CODING!","We are being called in the wrong Layout");
-            return;
-        }
-        name.setText(profile.getUserName());
-        //Title
-        TextView title = userView.findViewById(R.id.title);
-        title.setText(profile.getTitle());
-        //Lvl
-        TextView level = userView.findViewById(R.id.user_level);
-        level.setText("Level: " + profile.getLvl());
-        //XP Text
-        TextView xpText = userView.findViewById(R.id.text_XP);
-        xpText.setText(profile.getCurrXP() + "/" + profile.getNextlvlXP() + " XP");
-        //ProgressBarPercentage
-        ProgressBar progressBar = userView.findViewById(R.id.progressBar);
-        progressBar.setProgress(profile.getCurrXP());
-        progressBar.setMax(profile.getNextlvlXP());
-        //ProfilePhoto
-        ImageView profilePhoto = userView.findViewById(R.id.profilePhoto);
-        if(profile.getProfilePhotoString() != null){
-            profilePhoto.setImageURI(Uri.parse(profile.getProfilePhotoString()));
-        }
-    }
 }

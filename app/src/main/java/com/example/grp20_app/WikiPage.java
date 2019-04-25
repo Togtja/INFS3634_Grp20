@@ -17,7 +17,7 @@ public class WikiPage implements Serializable {
     private String title; //Title of the wikipedia page
     private String text;    //The a extracted section of the page
     private String imgURL;  //The URL to the thumbnail
-    private Bitmap image;   //A bitmap of the thumnail after we have downloaded it
+    private String image;   //A Path String of the thumnail URL after we have downloaded it
     private ArrayList<Pair<String, String>> sections;
 
     public WikiPage(int pageId, String title, String text, String imageUrl){
@@ -60,11 +60,11 @@ public class WikiPage implements Serializable {
         this.imgURL = imgURL;
     }
 
-    public Bitmap getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(Bitmap image) {
+    public void setImage(String image) {
         this.image = image;
     }
 }

@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/src/main/AndroidManifest.xml:2:1-27:12
-INJECTED from /home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/src/main/AndroidManifest.xml:2:1-27:12
-INJECTED from /home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/src/main/AndroidManifest.xml:2:1-27:12
-INJECTED from /home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/src/main/AndroidManifest.xml:2:1-27:12
+ADDED from /home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/src/main/AndroidManifest.xml:2:1-30:12
+INJECTED from /home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/src/main/AndroidManifest.xml:2:1-30:12
+INJECTED from /home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/src/main/AndroidManifest.xml:2:1-30:12
+INJECTED from /home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/src/main/AndroidManifest.xml:2:1-30:12
 MERGED from [com.android.support:design:28.0.0] /home/tomas/.gradle/caches/transforms-2/files-2.1/8fd5fe496f3e385458b1b032ed22e57c/AndroidManifest.xml:17:1-24:12
 MERGED from [com.android.support:appcompat-v7:28.0.0] /home/tomas/.gradle/caches/transforms-2/files-2.1/ab9a6b34f99afb7063bca5b3105cd817/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:cardview-v7:28.0.0] /home/tomas/.gradle/caches/transforms-2/files-2.1/55cd1cf986fe8afaff66e3c9645bc39d/AndroidManifest.xml:17:1-22:12
@@ -35,20 +35,20 @@ MERGED from [com.android.support:interpolator:28.0.0] /home/tomas/.gradle/caches
 MERGED from [android.arch.lifecycle:livedata:1.1.1] /home/tomas/.gradle/caches/transforms-2/files-2.1/46d3425d01ea9df14688f4c04576ccbd/AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /home/tomas/.gradle/caches/transforms-2/files-2.1/00b8bc694f7509e5f39762a85d8f529c/AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.core:runtime:1.1.1] /home/tomas/.gradle/caches/transforms-2/files-2.1/45cc0ea6f7c96cd61c5cdba1c70620c6/AndroidManifest.xml:17:1-22:12
-INJECTED from /home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/src/main/AndroidManifest.xml:2:1-27:12
-INJECTED from /home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/src/main/AndroidManifest.xml:2:1-27:12
-INJECTED from /home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/src/main/AndroidManifest.xml:2:1-27:12
+INJECTED from /home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/src/main/AndroidManifest.xml:2:1-30:12
+INJECTED from /home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/src/main/AndroidManifest.xml:2:1-30:12
+INJECTED from /home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/src/main/AndroidManifest.xml:2:1-30:12
 	package
 		ADDED from /home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/src/main/AndroidManifest.xml:3:5-36
 		INJECTED from /home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/src/main/AndroidManifest.xml
 		INJECTED from /home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/src/main/AndroidManifest.xml
 	android:versionName
 		INJECTED from /home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/src/main/AndroidManifest.xml
-		ADDED from /home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/src/main/AndroidManifest.xml:2:1-27:12
+		ADDED from /home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/src/main/AndroidManifest.xml:2:1-30:12
 		INJECTED from /home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/src/main/AndroidManifest.xml
 	android:versionCode
 		INJECTED from /home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/src/main/AndroidManifest.xml
-		ADDED from /home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/src/main/AndroidManifest.xml:2:1-27:12
+		ADDED from /home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/src/main/AndroidManifest.xml:2:1-30:12
 		INJECTED from /home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/src/main/AndroidManifest.xml
 	xmlns:android
 		ADDED from /home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/src/main/AndroidManifest.xml:2:11-69
@@ -57,7 +57,7 @@ ADDED from /home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/src/main/Android
 	android:name
 		ADDED from /home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/src/main/AndroidManifest.xml:4:22-64
 application
-ADDED from /home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/src/main/AndroidManifest.xml:5:5-25:19
+ADDED from /home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/src/main/AndroidManifest.xml:5:5-28:19
 MERGED from [com.android.support:design:28.0.0] /home/tomas/.gradle/caches/transforms-2/files-2.1/8fd5fe496f3e385458b1b032ed22e57c/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:design:28.0.0] /home/tomas/.gradle/caches/transforms-2/files-2.1/8fd5fe496f3e385458b1b032ed22e57c/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /home/tomas/.gradle/caches/transforms-2/files-2.1/28f0cde838254bdbfe2f0f68ccdc0cdd/AndroidManifest.xml:9:5-20
@@ -106,6 +106,12 @@ ADDED from /home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/src/main/Android
 		ADDED from /home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/src/main/AndroidManifest.xml:23:13-55
 	android:name
 		ADDED from /home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/src/main/AndroidManifest.xml:22:19-52
+activity#com.example.grp20_app.WW1QuizActivity
+ADDED from /home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/src/main/AndroidManifest.xml:25:9-27:20
+	android:parentActivityName
+		ADDED from /home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/src/main/AndroidManifest.xml:26:13-55
+	android:name
+		ADDED from /home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/src/main/AndroidManifest.xml:25:19-50
 uses-sdk
 INJECTED from /home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/src/main/AndroidManifest.xml

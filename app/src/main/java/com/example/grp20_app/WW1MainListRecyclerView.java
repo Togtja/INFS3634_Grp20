@@ -1,5 +1,6 @@
 package com.example.grp20_app;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 /*
@@ -27,11 +29,13 @@ public class WW1MainListRecyclerView extends RecyclerView.Adapter<WW1MainListRec
     private  ArrayList<Pair<String,Integer>> arrayPair;
     private FragmentManager fragmentManager;
     ArrayList<ArrayList<String>> wikiSites;
+    View viewQuiz;
 
     public WW1MainListRecyclerView(FragmentManager fragmentManager, ArrayList<Pair<String, Integer>> arrayPair, ArrayList<ArrayList<String>> wikiSites) {
         this.fragmentManager = fragmentManager;
         this.arrayPair = arrayPair;
         this.wikiSites = wikiSites;
+
 
     }
 
@@ -40,24 +44,24 @@ public class WW1MainListRecyclerView extends RecyclerView.Adapter<WW1MainListRec
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.ww1_mainpage, viewGroup, false);
+        viewQuiz = v;
         return new ViewHolder(v);
 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
+    public void onBindViewHolder(@NonNull final ViewHolder viewHolder, final int i) {
         viewHolder.name.setText(arrayPair.get(i).first);
         viewHolder.image.setImageResource(arrayPair.get(i).second);
         viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 //This means it is quiz
                 if(i == wikiSites.size()){
                     //Just opens the Quiz Fragment (Maybe make Activity)
-                    WW1QuizListFragment ww1QuizListFragment = new WW1QuizListFragment();
-                    fragmentManager.beginTransaction()
-                            .replace(R.id.wikifrag, ww1QuizListFragment).addToBackStack(null)
-                            .commit();
+                    viewQuiz.getContext().startActivity(new Intent(viewQuiz.getContext(), WW1QuizActivity.class));
+
                 }
                 else {
                     WW1SubListFragment ww1SubListFragment = new WW1SubListFragment();

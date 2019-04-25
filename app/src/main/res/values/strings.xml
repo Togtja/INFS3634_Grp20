@@ -5,4 +5,5 @@
     <string name="delete_info">This will delete the profile.\n
         However a profile is required to use the app\n
     We only store internally on your phone and have no access to any data you provide</string>
+    <string name="upload_photo">Upload profile photo (Optional)</string>
 </resources>

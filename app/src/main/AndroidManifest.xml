@@ -22,6 +22,9 @@
         <activity android:name=".WW1DisplayProfile"
             android:parentActivityName=".MainActivity">
         </activity>
+        <activity android:name=".WW1QuizActivity"
+            android:parentActivityName=".MainActivity">
+        </activity>
     </application>
 
 </manifest>

@@ -35,6 +35,10 @@
             android:name="com.example.grp20_app.WW1DisplayProfile"
             android:parentActivityName="com.example.grp20_app.MainActivity" >
         </activity>
+        <activity
+            android:name="com.example.grp20_app.WW1QuizActivity"
+            android:parentActivityName="com.example.grp20_app.MainActivity" >
+        </activity>
     </application>
 
 </manifest>

@@ -1,12 +1,9 @@
 
 package com.example.grp20_app;
-import android.graphics.Paint;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Pair;
 import android.view.LayoutInflater;
@@ -30,7 +27,7 @@ public class WW1MainListFragment extends Fragment {
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.ww1_main_list_view, container, false);
+        View view = inflater.inflate(R.layout.recyclerview, container, false);
         ww1MainList = view.findViewById(R.id.ww1_main_rv);
         ww1MainList.setHasFixedSize(true);
 
@@ -93,7 +90,6 @@ public class WW1MainListFragment extends Fragment {
         wikiPages.add(ww1_1917);
         wikiPages.add(ww1_1918);
         wikiPages.add(ww1_afterMatch);
-
         Bundle b =  getArguments();
         ArrayList<String> s = (ArrayList<String>) b.getSerializable("name");
         ArrayList<Integer> i = (ArrayList<Integer>) b.getSerializable("draw");

@@ -24,11 +24,9 @@ public class WW1DisplayProfile extends AppCompatActivity {
         setContentView(R.layout.ww1_user_profile);
         profilePhoto = findViewById(R.id.profilePhoto);
 
-        Uri uri = Uri.parse(MainActivity.GLOBAL_PROFILE.getProfilePhotoString());
         //If you have a photo display it
-        if(uri != null){
-            Log.d("Uri" , uri.toString());
-            profilePhoto.setImageURI(uri);
+        if(MainActivity.GLOBAL_PROFILE.getProfilePhotoString() != null){
+            profilePhoto.setImageURI(Uri.parse(MainActivity.GLOBAL_PROFILE.getProfilePhotoString()));
         }
     }
     public void DeleteProfile(View view){

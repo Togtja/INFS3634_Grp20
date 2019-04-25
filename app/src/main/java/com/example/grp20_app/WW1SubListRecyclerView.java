@@ -1,5 +1,7 @@
 package com.example.grp20_app;
 
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -20,6 +22,8 @@ import android.widget.TextView;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Type;
@@ -36,16 +40,18 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class WW1SubListRecyclerView extends RecyclerView.Adapter<WW1SubListRecyclerView.ViewHolder> {
     private FragmentManager fragmentManager;
     ArrayList<String> wikiSites;
-    ArrayList<WikiPage> wikiPage;
+    //ArrayList<WikiPage> wikiPage;
+    Context context;
 
     public WW1SubListRecyclerView(FragmentManager fragmentManager, ArrayList<String> wikiSites) {
         this.fragmentManager = fragmentManager;
         this.wikiSites = wikiSites;
-        wikiPage = new ArrayList<>();
+        //wikiPage = new ArrayList<>();
         //To make sure all pages are in bound
+        /*
         for(int i = 0; i < wikiSites.size(); i++){
             wikiPage.add(i, null);
-        }
+        }*/
     }
 
     @NonNull
@@ -53,6 +59,7 @@ public class WW1SubListRecyclerView extends RecyclerView.Adapter<WW1SubListRecyc
     public WW1SubListRecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.ww1_mainpage, viewGroup, false);
+        context = v.getContext();
         return new WW1SubListRecyclerView.ViewHolder(v);
 
     }
@@ -60,7 +67,6 @@ public class WW1SubListRecyclerView extends RecyclerView.Adapter<WW1SubListRecyc
     @Override
     public void onBindViewHolder(@NonNull final WW1SubListRecyclerView.ViewHolder viewHolder, final int i) {
         viewHolder.cardView.setVisibility(View.GONE); //Make it invisible till we have loaded it
-
         Type type = new TypeToken<WikiPage>() {
         }.getType();
         WikiApi pageClient = new Retrofit.Builder()
@@ -76,12 +82,12 @@ public class WW1SubListRecyclerView extends RecyclerView.Adapter<WW1SubListRecyc
 
             @Override
             public void onResponse(Call<WikiPage> call, Response<WikiPage> response) {
-                wikiPage.add(i, response.body());
-                viewHolder.name.setText(wikiPage.get(i).getTitle());
+                final WikiPage theSite = response.body();
+                viewHolder.name.setText(theSite.getTitle());
                 ImageView imageView = viewHolder.image;
-                if (wikiPage.get(i).getImgURL() != null) {
+                if (theSite.getImgURL() != null && theSite.getImage() == null) {
                     DownloadBitMap dbm = new DownloadBitMap();
-                    dbm.execute(new TheViews(imageView, wikiPage.get(i), viewHolder.cardView, viewHolder.progressBar));
+                    dbm.execute(new TheViews(imageView, theSite, viewHolder.cardView, viewHolder.progressBar));
                 }
                 else{
                     viewHolder.cardView.setVisibility(View.VISIBLE);
@@ -92,12 +98,12 @@ public class WW1SubListRecyclerView extends RecyclerView.Adapter<WW1SubListRecyc
                     @Override
                     public void onClick(View v) {//Give wikiPage to wikiPageFragment
                         Log.d("NULL", "This shouldn't happen :( nr is " + i);
-                        if (wikiPage.get(i) != null) {
+                        if (theSite != null) {
 
 
                             final WikiPageFragment wpf = new WikiPageFragment();
                             final Bundle b = new Bundle();
-                            b.putSerializable("wiki", wikiPage.get(i));
+                            b.putSerializable("wiki", theSite);
                             wpf.setArguments(b);
                             fragmentManager.beginTransaction()
                                     .replace(R.id.wikifrag, wpf).addToBackStack(null)
@@ -158,6 +164,13 @@ public class WW1SubListRecyclerView extends RecyclerView.Adapter<WW1SubListRecyc
                 connection.connect();
                 InputStream input = connection.getInputStream();
                 Bitmap img = BitmapFactory.decodeStream(input);
+
+                ContextWrapper cw = new ContextWrapper(context);
+                File mypath = new File(cw.getDir("tempImageDir", Context.MODE_PRIVATE), wikiPage.getTitle() + "_temp.png");
+                FileOutputStream fos = new FileOutputStream(mypath);
+                // Use the compress method on the BitMap object to write image to the OutputStream
+                img.compress(Bitmap.CompressFormat.PNG, 100, fos);
+                wikiPage.setImage(mypath.getAbsolutePath());
                 return  img;
 
             }
@@ -168,7 +181,7 @@ public class WW1SubListRecyclerView extends RecyclerView.Adapter<WW1SubListRecyc
         }
         protected void onPostExecute(Bitmap bitmap) {
             imageV.setImageBitmap(bitmap);
-            wikiPage.setImage(bitmap);
+            //wikiPage.setImage(bitmap);
             cv.setVisibility(View.VISIBLE);
             pBar.setVisibility(View.GONE);
         }

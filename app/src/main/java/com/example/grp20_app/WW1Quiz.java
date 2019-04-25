@@ -144,7 +144,7 @@ public class WW1Quiz {
         //multiple correct answers
         options = new ArrayList<>();
         options.add(new Pair<>(0 , "Germany"));
-        options.add(new Pair<>(1 , "Hungary"));
+        options.add(new Pair<>(1 , "Austria-Hungary"));
         options.add(new Pair<>(0 , "France"));
         options.add(new Pair<>(0 , "Italy"));
         //Actually adding the question

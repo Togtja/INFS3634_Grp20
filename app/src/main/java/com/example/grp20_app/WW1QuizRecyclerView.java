@@ -53,7 +53,7 @@ public class WW1QuizRecyclerView extends RecyclerView.Adapter<WW1QuizRecyclerVie
                 WW1QuizFragment ww1QuizFragment = new WW1QuizFragment();
                 ww1QuizFragment.setArguments(b);
                 fragmentManager.beginTransaction()
-                        .replace(R.id.wikifrag, ww1QuizFragment).addToBackStack(null)
+                        .replace(R.id.wikifrag, ww1QuizFragment, "quiz")
                         .commit();
             }
         });

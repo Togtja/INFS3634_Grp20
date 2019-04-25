@@ -18,7 +18,6 @@ import java.lang.reflect.Type;
 
 import java.util.ArrayList;
 
-// CURRENT PLAN
 /*
 * Get a list of wiki sites for the diffrent years/time
 * Each wiki site has an URI for a thumnail
@@ -35,12 +34,8 @@ public class MainActivity extends AppCompatActivity {
         //First checks if we have a profile on disk
         GLOBAL_PROFILE = WW1UserProfile.getData(getApplicationContext());
         if(GLOBAL_PROFILE == null){
-            //Removes the fragmnet from the stack
+            //Removes the fragment from the stack
             //(Only used if you came from deleted profile and try to go back)
-            FragmentManager fm = getSupportFragmentManager();
-            for(int i = 0; i < fm.getBackStackEntryCount(); ++i) {
-                fm.popBackStack();
-            }
             //If we couldn't find one, create one
             startActivity(new Intent(this, CreateUserProfile.class));
         }
@@ -95,20 +90,7 @@ public class MainActivity extends AppCompatActivity {
             super.onBackPressed();
         }
     }
-    @Override
-    protected void onStop() {
-        super.onStop();
-        //save user data to file
-        if(MainActivity.GLOBAL_PROFILE != null){
-            MainActivity.GLOBAL_PROFILE.saveData(getApplicationContext());
-        }
 
-    }
-
-    //If you click on your profile photo it opens some information about your profile
-    public void OpenProfile(View view){
-        startActivity(new Intent(this, WW1DisplayProfile.class));
-    }
     //A Deserializer for the wikipedia API that get the Title, A Section (The first Section)
     //And A URL the thumbnail if there is one
     static class WikiPageDeserializer implements JsonDeserializer<WikiPage> {

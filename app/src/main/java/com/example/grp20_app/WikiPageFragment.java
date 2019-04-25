@@ -1,5 +1,6 @@
 package com.example.grp20_app;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Html;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /*
 Displays the actual page stored in WikiPage.class
@@ -34,8 +36,6 @@ public class WikiPageFragment extends Fragment {
             //Displayed the wikipage class to the UI
             TextView title = view.findViewById(R.id.tvTitle);
             title.setText(wikipage.getTitle());
-            TextView year = view.findViewById(R.id.tvYear);
-            year.setText("must fix");
             TextView wiki = view.findViewById(R.id.tvWiki);
 
             //Removes HTML links
@@ -51,9 +51,9 @@ public class WikiPageFragment extends Fragment {
             */
             wiki.setText(Html.fromHtml(fixed));//Set the text to be the customized text
             image = view.findViewById(R.id.ivWW1);
-            image.setImageBitmap(wikipage.getImage());
-
-
+            if(wikipage.getImage() != null){
+                image.setImageURI(Uri.parse(wikipage.getImage()));
+            }
         }
 
         return view;

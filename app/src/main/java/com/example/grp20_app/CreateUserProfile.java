@@ -61,6 +61,12 @@ public class CreateUserProfile extends AppCompatActivity {
             }
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this, MainActivity.class));
+    }
+
     //the user clicked on the image and is now prompted to select a photo from his gallery
     public void getImage(View view){
         startActivityForResult(new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
@@ -69,25 +75,33 @@ public class CreateUserProfile extends AppCompatActivity {
 
         //Save the photo you selected from gallery to our internal storage
         ContextWrapper cw = new ContextWrapper(getApplicationContext());
-        // Create imageDir
-        File mypath = new File(cw.getDir("imageDir", Context.MODE_PRIVATE),"profile.jpg");
-        FileOutputStream fos = null;
-        try {
-            fos = new FileOutputStream(mypath);
-            // Use the compress method on the BitMap object to write image to the OutputStream
-            theImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
+        //Make a profile with the name
+        WW1UserProfile profile = new WW1UserProfile(text.getText().toString());
+
+        if(theImage != null) {
+            // Create imageDir
+            File mypath = new File(cw.getDir("imageDir", Context.MODE_PRIVATE), "profile.jpg");
+            FileOutputStream fos = null;
             try {
-                fos.close();
-            } catch (IOException e) {
+                fos = new FileOutputStream(mypath);
+                // Use the compress method on the BitMap object to write image to the OutputStream
+                theImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
+
+                //Give the User_profile the path to the photo so we can call it in the future
+                 profile.setProfilePhotoString(mypath.getAbsolutePath());
+
+            } catch (Exception e) {
                 e.printStackTrace();
+            } finally {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
-        //Give the User_profile the path to the photo so we can call it in the future
-        WW1UserProfile profile = new WW1UserProfile(text.getText().toString(), mypath.getAbsolutePath());
         profile.saveData(this); //We save the profile to internal storage
+
         //we start the main activity again, now with a profile on disk
 
         startActivity(new Intent(this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));

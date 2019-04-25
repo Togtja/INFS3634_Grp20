@@ -12,28 +12,19 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import java.util.ArrayList;
-/*
-* Displays a list of the different question categories
-*  Currently takes in nothing
-*
-*/
+
 public class WW1QuizListFragment extends Fragment {
     RecyclerView quizRecycler;
     WW1QuizRecyclerView mAdapter;
-    @Nullable
-    @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        super.onCreateView(inflater, container, savedInstanceState);
+        View view = inflater.inflate(R.layout.recyclerview, container, false);
 
-        View view = inflater.inflate(R.layout.ww1_quiz_fragment, container, false);
-
-        FrameLayout frame = view.findViewById(R.id.ww1_quizlist_user);
-        View userView = LayoutInflater.from(getContext()).inflate(R.layout.ww1_user_stuff, frame, true);
-        WW1QuizFragment.UserSetup(userView);
+        //FrameLayout frame = view.findViewById(R.id.ww1_quizlist_user);
+        //View userView = LayoutInflater.from(getContext()).inflate(R.layout.ww1_user_stuff, frame, true);
+        //WW1QuizActivity.UserSetup(userView);
 
 
-
-        quizRecycler = view.findViewById(R.id.ww1_quizlist_rv);
+        quizRecycler = view.findViewById(R.id.ww1_main_rv);
         quizRecycler.setHasFixedSize(true);
 
         quizRecycler.setLayoutManager(new GridLayoutManager(getContext(), 1));
@@ -50,9 +41,6 @@ public class WW1QuizListFragment extends Fragment {
         mAdapter = new WW1QuizRecyclerView(getFragmentManager(), test_list);
 
         quizRecycler.setAdapter(mAdapter);
-
         return view;
     }
-
 }
-

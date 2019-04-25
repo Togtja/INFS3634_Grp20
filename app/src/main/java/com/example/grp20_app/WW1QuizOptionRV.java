@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -31,13 +32,13 @@ public class WW1QuizOptionRV extends RecyclerView.Adapter<WW1QuizOptionRV.ViewHo
     Context context; //Need the context to build a quiz
     View progressBarView; //Takes in the userView which updates the stats of the user
     int quizArray; //The id of the array of question we use
-    WW1QuizOptionRV(FragmentManager fragmentManager,ArrayList<Pair<Integer,String>> quizzes, int questionNr, int currScore, int currStrike, int quizArray, View userView){
+    WW1QuizOptionRV(FragmentManager fragmentManager,ArrayList<Pair<Integer,String>> options, int questionNr, int currScore, int currStrike, int quizArray, View pBar){
         this.fragmentManager = fragmentManager;
-        this.options = quizzes;
+        this.options = options;
         qNr = questionNr;
         this.currScore = currScore;
         this.currStrike = currStrike;
-        this.progressBarView = userView;
+        this.progressBarView = pBar;
         this.quizArray = quizArray;
 
     }
@@ -54,6 +55,7 @@ public class WW1QuizOptionRV extends RecyclerView.Adapter<WW1QuizOptionRV.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
         //To do set this up as a async task, and just let main show a loading bar
+
         Button btn = viewHolder.optionBtn;
         btn.setText(options.get(i).second);
         btn.setOnClickListener(new View.OnClickListener() {
@@ -83,15 +85,19 @@ public class WW1QuizOptionRV extends RecyclerView.Adapter<WW1QuizOptionRV.ViewHo
             optionBtn = itemView.findViewById(R.id.answer1);
         }
     }
-    private class LoadQuestion extends AsyncTask<Integer, Void, WW1QuizFragment> {
+    private class LoadQuestion extends AsyncTask<Integer, Pair<Boolean, Integer>, WW1QuizFragment> {
         protected WW1QuizFragment doInBackground(Integer... ints) {
             if (options.get(ints[0]).first == 1) {
                 currScore += 100;
-                MainActivity.GLOBAL_PROFILE.addCurrXP(100 + Math.round((100.f * (currStrike / 10.f))));
+                int xpGain = 100 + Math.round((100.f * (currStrike / 10.f)));
+                MainActivity.GLOBAL_PROFILE.addCurrXP(xpGain);
                 currStrike += 1;
+                publishProgress(new Pair<>(Boolean.TRUE, xpGain));
                 // WW1QuizFragment.UserSetup(userView);
             } else {
                 currStrike = 0;
+                publishProgress(new Pair<> (Boolean.FALSE, 0));
+
                 //wrong answer
                 //Give 0 points and no xp
             }
@@ -108,7 +114,19 @@ public class WW1QuizOptionRV extends RecyclerView.Adapter<WW1QuizOptionRV.ViewHo
             return  ww1QuizFragment;
         }
 
+        @Override
+        protected void onProgressUpdate(Pair<Boolean, Integer>... values) {
+            super.onProgressUpdate(values);
+            if(values[0].first){
+                Toast.makeText(context, "CORRECT! REWARDED " + values[0].second + "xp", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                Toast.makeText(progressBarView.getContext(),"WRONG!", Toast.LENGTH_SHORT).show();
+            }
+        }
+
         protected void onPostExecute(WW1QuizFragment result) {
+            WW1QuizActivity.UserUpdate();
             fragmentManager.beginTransaction()
                     .replace(R.id.wikifrag, result)
                     .commit();
