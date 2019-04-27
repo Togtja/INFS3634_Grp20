@@ -1362,6 +1362,10 @@ layout ww1_user_profile
 layout ww1_user_stuff
 mipmap ic_launcher
 mipmap ic_launcher_round
+mipmap qvasir_logo
+mipmap qvasir_logo_background
+mipmap qvasir_logo_foreground
+mipmap qvasir_logo_round
 string abc_action_bar_home_description
 string abc_action_bar_up_description
 string abc_action_menu_overflow_description

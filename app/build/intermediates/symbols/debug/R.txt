@@ -1361,6 +1361,10 @@ int layout ww1_user_profile 0x7f0b003e
 int layout ww1_user_stuff 0x7f0b003f
 int mipmap ic_launcher 0x7f0c0000
 int mipmap ic_launcher_round 0x7f0c0001
+int mipmap qvasir_logo 0x7f0c0002
+int mipmap qvasir_logo_background 0x7f0c0003
+int mipmap qvasir_logo_foreground 0x7f0c0004
+int mipmap qvasir_logo_round 0x7f0c0005
 int string abc_action_bar_home_description 0x7f0d0000
 int string abc_action_bar_up_description 0x7f0d0001
 int string abc_action_menu_overflow_description 0x7f0d0002

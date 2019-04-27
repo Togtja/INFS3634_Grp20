@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
 import java.util.ArrayList;
 /*
 * This class takes in an Array of Pairs of Stings and Integers
@@ -26,12 +28,16 @@ import java.util.ArrayList;
 * */
 
 public class WW1MainListRecyclerView extends RecyclerView.Adapter<WW1MainListRecyclerView.ViewHolder> {
+
+    static ArrayList<WikiPage> wikiPages = new ArrayList<>();
+    static int wikiPageSize = 0;
+
     private  ArrayList<Pair<String,Integer>> arrayPair;
     private FragmentManager fragmentManager;
-    ArrayList<ArrayList<String>> wikiSites;
-    View viewQuiz;
+    private ArrayList<ArrayList<String>> wikiSites;
+    private View viewQuiz;
 
-    public WW1MainListRecyclerView(FragmentManager fragmentManager, ArrayList<Pair<String, Integer>> arrayPair, ArrayList<ArrayList<String>> wikiSites) {
+    WW1MainListRecyclerView(FragmentManager fragmentManager, ArrayList<Pair<String, Integer>> arrayPair, ArrayList<ArrayList<String>> wikiSites) {
         this.fragmentManager = fragmentManager;
         this.arrayPair = arrayPair;
         this.wikiSites = wikiSites;
@@ -50,15 +56,18 @@ public class WW1MainListRecyclerView extends RecyclerView.Adapter<WW1MainListRec
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final ViewHolder viewHolder, final int i) {
+    public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i) {
+
         viewHolder.name.setText(arrayPair.get(i).first);
         viewHolder.image.setImageResource(arrayPair.get(i).second);
+        final int fin_i = i;
         viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
 
                 //This means it is quiz
-                if(i == wikiSites.size()){
+                if(fin_i == wikiSites.size()){
                     //Just opens the Quiz Fragment (Maybe make Activity)
                     viewQuiz.getContext().startActivity(new Intent(viewQuiz.getContext(), WW1QuizActivity.class));
 
@@ -68,18 +77,33 @@ public class WW1MainListRecyclerView extends RecyclerView.Adapter<WW1MainListRec
                     //Bundle the Wikipages for that specific category
                     //E.g Bundle the 1917 wikipages to the 1917 category
                     Bundle b = new Bundle();
-                    b.putSerializable("wiki", wikiSites.get(i));
+                    for (int j = 0; j < wikiPageSize; j++) {
+                        if(wikiPages.get(j) == null){
+                            continue;
+                        }
+                        if(wikiPages.get(j).getImage() != null){
+                            File photo = new File(wikiPages.get(j).getImage());
+                            if(photo.delete()){
+                                //Debug
+                            }
+                            else{
+                            }
+                        }
+                    }
+                    wikiPages = new ArrayList<>();
+                    for (int j = 0; j < wikiSites.get(fin_i).size(); j++) {
+                        wikiPages.add(null);
+                    }
+                    wikiPageSize = wikiPages.size();
+                    b.putSerializable("wiki", wikiSites.get(fin_i));
                     ww1SubListFragment.setArguments(b);
                     fragmentManager.beginTransaction()
                             .replace(R.id.wikifrag, ww1SubListFragment).addToBackStack(null)
                             .commit();
                 }
-
             }
 
         });
-
-
     }
 
     @Override

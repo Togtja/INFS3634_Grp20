@@ -31,6 +31,18 @@ public class WW1DisplayProfile extends AppCompatActivity {
     }
     public void DeleteProfile(View view){
         //Removes the file called "user_profile"
+        if(MainActivity.GLOBAL_PROFILE.getProfilePhotoString()!=null){
+            File photoFile = new File(MainActivity.GLOBAL_PROFILE.getProfilePhotoString());
+            if(photoFile.delete()){
+             //debug
+                Log.d("Delete", "DeleteProfile: Deleted photo");
+            }
+            else{
+                Log.d("File", "Deleted Photo fuck up up");
+            }
+
+        }
+
         File file = new File(getFilesDir(), "user_profile");
         boolean deleted = file.delete();
         if(deleted){

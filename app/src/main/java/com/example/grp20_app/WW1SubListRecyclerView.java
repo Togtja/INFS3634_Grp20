@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -46,6 +47,8 @@ public class WW1SubListRecyclerView extends RecyclerView.Adapter<WW1SubListRecyc
     public WW1SubListRecyclerView(FragmentManager fragmentManager, ArrayList<String> wikiSites) {
         this.fragmentManager = fragmentManager;
         this.wikiSites = wikiSites;
+        Log.d("SIZE", "wikisites size in sublistRV  " + wikiSites.size());
+        Log.d("SIZE", "wikipages size in sublistRV  " + WW1MainListRecyclerView.wikiPages.size());
         //wikiPage = new ArrayList<>();
         //To make sure all pages are in bound
         /*
@@ -66,62 +69,81 @@ public class WW1SubListRecyclerView extends RecyclerView.Adapter<WW1SubListRecyc
 
     @Override
     public void onBindViewHolder(@NonNull final WW1SubListRecyclerView.ViewHolder viewHolder, final int i) {
-        viewHolder.cardView.setVisibility(View.GONE); //Make it invisible till we have loaded it
-        Type type = new TypeToken<WikiPage>() {
-        }.getType();
-        WikiApi pageClient = new Retrofit.Builder()
-                .baseUrl("https://en.wikipedia.org/api/rest_v1/")
-                .addConverterFactory(GsonConverterFactory.create(new GsonBuilder()
-                        .registerTypeAdapter(type, new MainActivity.WikiPageDeserializer())
-                        .create()))
-                .build().create(WikiApi.class);
+        if(WW1MainListRecyclerView.wikiPages.get(i) == null){
+            viewHolder.cardView.setVisibility(View.GONE); //Make it invisible till we have loaded it
+            Type type = new TypeToken<WikiPage>() {
+            }.getType();
+            WikiApi pageClient = new Retrofit.Builder()
+                    .baseUrl("https://en.wikipedia.org/api/rest_v1/")
+                    .addConverterFactory(GsonConverterFactory.create(new GsonBuilder()
+                            .registerTypeAdapter(type, new MainActivity.WikiPageDeserializer())
+                            .create()))
+                    .build().create(WikiApi.class);
 
-        Call<WikiPage> call = pageClient.wikiSite(wikiSites.get(i));
-        Log.d("Magic", "The nr is " + i);
-        call.enqueue(new Callback<WikiPage>() {
+            Call<WikiPage> call = pageClient.wikiSite(wikiSites.get(i));
+            Log.d("Magic", "The nr is " + i);
+            call.enqueue(new Callback<WikiPage>() {
 
-            @Override
-            public void onResponse(Call<WikiPage> call, Response<WikiPage> response) {
-                final WikiPage theSite = response.body();
-                viewHolder.name.setText(theSite.getTitle());
-                ImageView imageView = viewHolder.image;
-                if (theSite.getImgURL() != null && theSite.getImage() == null) {
-                    DownloadBitMap dbm = new DownloadBitMap();
-                    dbm.execute(new TheViews(imageView, theSite, viewHolder.cardView, viewHolder.progressBar));
-                }
-                else{
-                    viewHolder.cardView.setVisibility(View.VISIBLE);
-                    viewHolder.progressBar.setVisibility(View.GONE);
-                }
-
-                viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {//Give wikiPage to wikiPageFragment
-                        Log.d("NULL", "This shouldn't happen :( nr is " + i);
-                        if (theSite != null) {
-
-
-                            final WikiPageFragment wpf = new WikiPageFragment();
-                            final Bundle b = new Bundle();
-                            b.putSerializable("wiki", theSite);
-                            wpf.setArguments(b);
-                            fragmentManager.beginTransaction()
-                                    .replace(R.id.wikifrag, wpf).addToBackStack(null)
-                                    .commit();
-                        }
+                @Override
+                public void onResponse(Call<WikiPage> call, Response<WikiPage> response) {
+                    final WikiPage theSite = response.body();
+                    WW1MainListRecyclerView.wikiPages.add(i, theSite);
+                    viewHolder.name.setText(theSite.getTitle());
+                    ImageView imageView = viewHolder.image;
+                    if (theSite.getImgURL() != null && theSite.getImage() == null) {
+                        DownloadBitMap dbm = new DownloadBitMap();
+                        dbm.execute(new TheViews(imageView, theSite, viewHolder.cardView, viewHolder.progressBar));
                     }
-                });
+                    else{
+                        viewHolder.cardView.setVisibility(View.VISIBLE);
+                        viewHolder.progressBar.setVisibility(View.GONE);
+                    }
+                    viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {//Give wikiPage to wikiPageFragment
+                            Log.d("NULL", "This shouldn't happen :( nr is " + i);
+                            if (theSite != null) {
 
 
+                                final WikiPageFragment wpf = new WikiPageFragment();
+                                final Bundle b = new Bundle();
+                                b.putSerializable("wiki", theSite);
+                                wpf.setArguments(b);
+                                fragmentManager.beginTransaction()
+                                        .replace(R.id.wikifrag, wpf).addToBackStack(null)
+                                        .commit();
+                            }
+                        }
+                    });
+                }
 
+                @Override
+                public void onFailure(Call<WikiPage> call, Throwable t) {
+                    Log.d("CALL1", "FAILED");
+                    t.printStackTrace();
+                }
+            });
+        }
+        else{
+            final WikiPage theSite = WW1MainListRecyclerView.wikiPages.get(i);
+            viewHolder.name.setText(theSite.getTitle());
+            if (theSite.getImage() != null) {
+                ImageView imageView = viewHolder.image;
+                imageView.setImageURI(Uri.parse(theSite.getImage()));
             }
-
-            @Override
-            public void onFailure(Call<WikiPage> call, Throwable t) {
-                Log.d("CALL1", "FAILED");
-                t.printStackTrace();
-            }
-        });
+            viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {//Give wikiPage to wikiPageFragment
+                    final WikiPageFragment wpf = new WikiPageFragment();
+                    final Bundle b = new Bundle();
+                    b.putSerializable("wiki", theSite);
+                    wpf.setArguments(b);
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.wikifrag, wpf).addToBackStack(null)
+                            .commit();
+                }
+            });
+        }
 
 
     }

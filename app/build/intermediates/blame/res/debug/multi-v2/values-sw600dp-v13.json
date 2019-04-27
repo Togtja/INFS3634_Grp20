@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/home/tomas/AndroidStudioProjects/INFS3634_Grp20/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-sw600dp-v13/values-sw600dp-v13.xml",
+            "outputFile": "C:\\Users\\Tomas\\AndroidStudioProjects\\INFS3634_Grp20\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-sw600dp-v13\\values-sw600dp-v13.xml",
             "map": [
                 {
-                    "source": "/home/tomas/.gradle/caches/transforms-2/files-2.1/ab9a6b34f99afb7063bca5b3105cd817/res/values-sw600dp-v13/values-sw600dp-v13.xml",
+                    "source": "C:\\Users\\Tomas\\.gradle\\caches\\transforms-2\\files-2.1\\6e00f4cc4646d349c56acf47210059b6\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",
@@ -14,7 +14,7 @@
                     }
                 },
                 {
-                    "source": "/home/tomas/.gradle/caches/transforms-2/files-2.1/8fd5fe496f3e385458b1b032ed22e57c/res/values-sw600dp-v13/values-sw600dp-v13.xml",
+                    "source": "C:\\Users\\Tomas\\.gradle\\caches\\transforms-2\\files-2.1\\6e9d26cc6d09920f51bf869547e15bb3\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,10,11,12",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4",

@@ -1,11 +1,9 @@
 package com.example.grp20_app;
 
 import android.content.Intent;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 
 
 import com.google.gson.JsonDeserializationContext;
@@ -14,6 +12,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
+import java.io.File;
 import java.lang.reflect.Type;
 
 import java.util.ArrayList;
@@ -88,6 +87,21 @@ public class MainActivity extends AppCompatActivity {
         }
         else {
             super.onBackPressed();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        for (int j = 0; j < WW1MainListRecyclerView.wikiPageSize; j++) {
+
+            if(WW1MainListRecyclerView.wikiPages.get(j) == null){
+                continue;
+            }
+            if(WW1MainListRecyclerView.wikiPages.get(j).getImage() != null){
+                File photo = new File(WW1MainListRecyclerView.wikiPages.get(j).getImage());
+                photo.delete(); //Delete our use on the app
+            }
         }
     }
 

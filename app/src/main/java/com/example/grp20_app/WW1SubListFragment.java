@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 public class WW1SubListFragment extends Fragment {
     private WW1SubListRecyclerView mAdapter;
     RecyclerView ww1MainList;
-    ArrayList<String> wikiPages = new ArrayList<>();
+    ArrayList<String> wikiPagesAPI = new ArrayList<>();
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -29,11 +30,13 @@ public class WW1SubListFragment extends Fragment {
         ww1MainList.setLayoutManager(new GridLayoutManager(getContext(), 2));
 
 
-
-        wikiPages  = (ArrayList<String>) getArguments().getSerializable("wiki");
+        //The string of API call we have to make
+        wikiPagesAPI  = (ArrayList<String>) getArguments().getSerializable("wiki");
+        Log.d("SIZE", "wikisites size in sublist " + wikiPagesAPI.size());
+        Log.d("SIZE", "wikipages size in sublist  " + WW1MainListRecyclerView.wikiPages.size());
 
         FragmentManager fragmentManager = getFragmentManager();
-        mAdapter = new WW1SubListRecyclerView(fragmentManager, wikiPages);
+        mAdapter = new WW1SubListRecyclerView(fragmentManager, wikiPagesAPI);
         ww1MainList.setAdapter(mAdapter);
         return view;
 
